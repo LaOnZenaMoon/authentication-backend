@@ -1,4 +1,4 @@
-package me.lozm.api.auth;
+package me.lozm.api.auth.service;
 
 import lombok.RequiredArgsConstructor;
 import me.lozm.domain.auth.entity.User;

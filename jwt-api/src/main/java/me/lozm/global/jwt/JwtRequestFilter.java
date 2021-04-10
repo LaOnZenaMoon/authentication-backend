@@ -3,8 +3,7 @@ package me.lozm.global.jwt;
 import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import me.lozm.api.auth.JwtAuthenticationService;
-import me.lozm.api.auth.UserDetailsServiceImpl;
+import me.lozm.api.auth.service.UserDetailsServiceImpl;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,6 +29,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         final String requestTokenHeader = request.getHeader("Authorization");
+
         String username = null;
         String jwtToken = null;
 
@@ -39,8 +39,10 @@ public class JwtRequestFilter extends OncePerRequestFilter {
                 username = jwtTokenUtils.getUsernameFromToken(jwtToken);
             } catch (IllegalArgumentException e) {
                 log.error("Unable to get JWT Token");
+                throw new RuntimeException("Unable to get JWT Token");
             } catch (ExpiredJwtException e) {
                 log.error("JWT Token has expired");
+                throw new RuntimeException("JWT Token has expired");
             }
         } else {
             log.warn("JWT Token does not begin with Bearer String");
