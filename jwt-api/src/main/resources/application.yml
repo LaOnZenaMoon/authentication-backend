@@ -1,0 +1,25 @@
+server:
+  port: 8890
+
+spring:
+  application:
+    name: auth-api
+  jpa.hibernate.ddl-auto: none
+  profiles:
+    active: local
+
+logging:
+  level:
+    root: info
+    me.lozm: debug
+
+jwt:
+  secret: hashing-jwt-token-secret-key-test
+  expiration-time: 18000
+  token-prefix: Bearer
+  header-string: Authorization
+
+decorator:
+  datasource:
+    p6spy:
+      enable-logging: true

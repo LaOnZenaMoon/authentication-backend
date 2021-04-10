@@ -1,0 +1,21 @@
+bootJar { enabled = true }
+jar { enabled = true }
+
+dependencies {
+    compile project(':core')
+    compile 'mysql:mysql-connector-java'
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // JWT
+    implementation 'io.jsonwebtoken:jjwt:0.9.1'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    // Eureka
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
+
+    // Logging
+    implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.6.1'
+}
