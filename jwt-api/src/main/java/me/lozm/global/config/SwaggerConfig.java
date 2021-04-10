@@ -51,8 +51,8 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-                .title("jwt-api Documentation")
-                .description("JWT 인증 API 서버 문서입니다.")
+                .title("authentication-api Documentation")
+                .description("인증 API 서버 문서입니다.")
                 .license("JUN LEE(@LaOnZenaMoon)")
                 .licenseUrl("https://github.com/LaOnZenaMoon")
                 .termsOfServiceUrl("https://github.com/LaOnZenaMoon")

@@ -3,6 +3,7 @@ package me.lozm.global.config;
 import lombok.RequiredArgsConstructor;
 import me.lozm.api.auth.controller.JwtAuthenticationController;
 import me.lozm.api.auth.service.UserDetailsServiceImpl;
+import me.lozm.api.user.controller.UserController;
 import me.lozm.global.jwt.JwtAuthenticationEntryPoint;
 import me.lozm.global.jwt.JwtRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,7 +61,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
 
         httpSecurity.authorizeRequests()
-                .antMatchers(JwtAuthenticationController.AUTHENTICATE).permitAll()
+                .antMatchers(JwtAuthenticationController.AUTHENTICATE_PATH).permitAll()
+                .antMatchers(UserController.USER_PATH + "/**").permitAll()
                 .anyRequest().authenticated();
     }
 

@@ -17,14 +17,14 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class JwtAuthenticationController {
 
-    public static final String AUTHENTICATE = "/authenticate";
+    public static final String AUTHENTICATE_PATH = "/authenticate";
 
 
     private final JwtAuthenticationService jwtAuthenticationService;
 
 
     @ApiOperation("JWT 인증토큰 발급")
-    @PostMapping(AUTHENTICATE)
+    @PostMapping(AUTHENTICATE_PATH)
     public AuthDto.Response createAuthenticationToken(@RequestBody @Valid AuthDto.Request requestDto) {
 
         AuthVo jwt = jwtAuthenticationService.getToken(AuthVo.builder()

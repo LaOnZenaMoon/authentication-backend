@@ -1,0 +1,14 @@
+### JWT 인증토큰 발급
+POST {{host}}/authenticate
+Content-Type: application/json
+
+{
+  "identifier": "admin",
+  "password": "asdfasdf1234"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status == 200, "Response status is not 200");
+});
+%}

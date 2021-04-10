@@ -1,0 +1,66 @@
+### 사용자 추가
+POST {{host}}/user
+Content-Type: application/json
+
+{
+  "name": "관리자",
+  "identifier": "admin",
+  "password": "asdfasdf1234",
+  "type": "ADMIN"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status == 200, "Response status is not 200");
+  client.global.set("userId", response.body.id);
+});
+%}
+
+### 사용자 목록 조회
+GET {{host}}/user/userType/ALL
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status == 200, "Response status is not 200");
+});
+%}
+
+### 사용자 상세 조회
+GET {{host}}/user/{{userId}}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status == 200, "Response status is not 200");
+});
+%}
+
+### 사용자 수정
+PUT {{host}}/user
+Content-Type: application/json
+
+{
+  "id": "{{userId}}",
+  "name": "변경된 사용자",
+  "password": "asdfasdf1234asdf!",
+  "type": "USER"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status == 200, "Response status is not 200");
+});
+%}
+
+### 사용자 삭제
+DELETE {{host}}/user
+Content-Type: application/json
+
+{
+  "id": "{{userId}}"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status == 200, "Response status is not 200");
+});
+%}

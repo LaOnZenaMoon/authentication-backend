@@ -12,10 +12,13 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @Api(tags = {"사용자 관리"})
-@RequestMapping("user")
+@RequestMapping(UserController.USER_PATH)
 @RestController
 @RequiredArgsConstructor
 public class UserController {
+
+    public static final String USER_PATH = "/user";
+
 
     private final UserService userService;
 

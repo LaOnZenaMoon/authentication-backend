@@ -5,6 +5,7 @@ import lombok.experimental.SuperBuilder;
 import me.lozm.global.code.UseYn;
 import me.lozm.global.code.UsersType;
 import me.lozm.global.code.converter.UseYnConverter;
+import me.lozm.global.code.converter.UsersTypeConverter;
 import me.lozm.global.common.BaseEntity;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.ObjectUtils;
@@ -36,7 +37,7 @@ public class User extends BaseEntity {
     private String password;
 
     @Column(name = "TYPE")
-    @Convert(converter = UseYnConverter.class)
+    @Convert(converter = UsersTypeConverter.class)
     private UsersType type;
 
 
