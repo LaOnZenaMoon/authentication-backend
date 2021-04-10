@@ -23,3 +23,21 @@ decorator:
   datasource:
     p6spy:
       enable-logging: true
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 120000
+
+ribbon:
+  MaxAutoRetries: 2
+  MaxAutoRetriesNextServer: 3
+  OkToRetryOnAllOperations: true
+  ReadTimeout: 5000
+  ConnectTimeout: 1000
+  MaxTotalConnections: 300
+  MaxConnectionsPerHost: 100
+  retryableStatusCodes: 500
