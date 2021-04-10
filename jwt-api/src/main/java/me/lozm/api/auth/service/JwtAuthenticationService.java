@@ -1,8 +1,8 @@
 package me.lozm.api.auth.service;
 
 import lombok.RequiredArgsConstructor;
-import me.lozm.domain.auth.entity.User;
-import me.lozm.domain.auth.service.UserHelperService;
+import me.lozm.domain.user.entity.User;
+import me.lozm.domain.user.service.UserHelperService;
 import me.lozm.domain.auth.vo.AuthVo;
 import me.lozm.global.code.UseYn;
 import me.lozm.global.jwt.JwtTokenUtils;
