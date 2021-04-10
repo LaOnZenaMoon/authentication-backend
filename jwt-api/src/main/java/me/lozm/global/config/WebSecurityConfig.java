@@ -1,7 +1,7 @@
 package me.lozm.global.config;
 
 import lombok.RequiredArgsConstructor;
-import me.lozm.api.auth.JwtAuthenticationService;
+import me.lozm.api.auth.UserDetailsServiceImpl;
 import me.lozm.global.jwt.JwtAuthenticationEntryPoint;
 import me.lozm.global.jwt.JwtRequestFilter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +24,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final JwtAuthenticationService jwtAuthenticationService;
+    private final UserDetailsServiceImpl userDetailsService;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final JwtRequestFilter jwtRequestFilter;
 
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(jwtAuthenticationService).passwordEncoder(passwordEncoder());
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
     @Bean

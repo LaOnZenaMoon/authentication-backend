@@ -10,35 +10,18 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
 
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class JwtAuthenticationService implements UserDetailsService {
+public class JwtAuthenticationService {
 
     private final AuthenticationManager authenticationManager;
     private final JwtTokenUtils jwtTokenUtils;
     private final UserHelperService userHelperService;
 
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        AuthVo authVo = getAuthVoByUserIdentifier(username);
-
-        //TODO Collection<? extends GrantedAuthority> authorities 설정
-        return new org.springframework.security.core.userdetails.User(
-                authVo.getIdentifier(),
-                authVo.getPassword(),
-                new ArrayList<>()
-        );
-    }
 
     public AuthVo getToken(AuthVo authVo) {
         authenticate(authVo.getIdentifier(), authVo.getPassword());
