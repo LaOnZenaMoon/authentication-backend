@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @Api(tags = {"사용자 관리"})
+@CrossOrigin
 @RequestMapping(UserController.USER_PATH)
 @RestController
 @RequiredArgsConstructor
@@ -25,14 +26,14 @@ public class UserController {
 
     @ApiOperation("사용자 목록 조회")
     @GetMapping("userType/{usersType}")
-    public UserDto.ResponseList getUserList(@PathVariable(value = "usersType") UsersType usersType, Pageable pageable) {
+    public UserDto.ResponseList getUserList(@PathVariable("usersType") UsersType usersType, Pageable pageable) {
 
         return UserDto.ResponseList.createUserList(userService.getUserList(usersType, pageable));
     }
 
     @ApiOperation("사용자 상세 조회")
     @GetMapping("{userId}")
-    public UserDto.ResponseOne getUserDetail(@PathVariable(value = "userId") Long UserId) {
+    public UserDto.ResponseOne getUserDetail(@PathVariable("userId") Long UserId) {
 
         return UserDto.ResponseOne.from(userService.getUserDetail(UserId));
     }
@@ -52,10 +53,10 @@ public class UserController {
     }
 
     @ApiOperation("사용자 삭제")
-    @DeleteMapping
-    public UserDto.ResponseOne removeUser(@RequestBody @Valid UserDto.RemoveRequest requestDto) {
+    @DeleteMapping("{userId}")
+    public UserDto.ResponseOne removeUser(@PathVariable("userId") Long userId) {
 
-        return UserDto.ResponseOne.from(userService.removeUser(requestDto));
+        return UserDto.ResponseOne.from(userService.removeUser(userId));
     }
 
 }

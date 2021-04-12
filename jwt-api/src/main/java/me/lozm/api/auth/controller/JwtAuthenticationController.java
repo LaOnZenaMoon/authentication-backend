@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import me.lozm.api.auth.service.JwtAuthenticationService;
 import me.lozm.domain.auth.dto.AuthDto;
 import me.lozm.domain.auth.vo.AuthVo;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.Valid;
 
 @Api(tags = {"JWT 인증"})
+@CrossOrigin
 @RestController
 @RequiredArgsConstructor
 public class JwtAuthenticationController {

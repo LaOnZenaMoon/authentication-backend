@@ -8,6 +8,7 @@ import me.lozm.domain.user.repository.UserRepositorySupport;
 import me.lozm.domain.user.service.UserHelperService;
 import me.lozm.global.code.UseYn;
 import me.lozm.global.code.UsersType;
+import me.lozm.global.jwt.JwtTokenUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -66,10 +67,10 @@ public class UserService {
     }
 
     @Transactional
-    public User removeUser(UserDto.RemoveRequest requestDto) {
+    public User removeUser(Long userId) {
 
-        User user = userHelperService.getUser(requestDto.getId(), UseYn.USE);
-        user.edit(null, null, null, requestDto.getModifiedBy(), UseYn.NOT_USE);
+        User user = userHelperService.getUser(userId, UseYn.USE);
+        user.edit(null, null, null, null, UseYn.NOT_USE);
         return user;
     }
 
