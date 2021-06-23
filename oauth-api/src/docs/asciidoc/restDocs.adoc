@@ -1,0 +1,98 @@
+ifndef::snippets[]
+:snippets: ../../../build/generated-snippets
+endif::[]
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectlinks:
+:site-url: /build/asciidoc/html5/
+:operation-curl-request-title: Example request
+:operation-http-response-title: Example response
+
+
+== Health Check
+=== Get health check data
+Using `GET` method, get health check data
+
+==== Request
+//include::{snippets}/get-healthCheck/path-parameters.adoc[]
+include::{snippets}/get-healthCheck/request-parameters.adoc[]
+include::{snippets}/get-healthCheck/http-request.adoc[]
+
+==== Response
+include::{snippets}/get-healthCheck/response-fields.adoc[]
+include::{snippets}/get-healthCheck/http-response.adoc[]
+
+
+=== Post health check data
+Using `POST` method, post health check data
+
+==== Request
+include::{snippets}/post-healthCheck/request-fields.adoc[]
+include::{snippets}/post-healthCheck/http-request.adoc[]
+
+==== Response
+include::{snippets}/post-healthCheck/response-fields.adoc[]
+include::{snippets}/post-healthCheck/http-response.adoc[]
+
+
+=== Put health check data
+Using `PUT` method, put health check data
+
+==== Request
+include::{snippets}/put-healthCheck/request-fields.adoc[]
+include::{snippets}/put-healthCheck/http-request.adoc[]
+
+==== Response
+include::{snippets}/put-healthCheck/response-fields.adoc[]
+include::{snippets}/put-healthCheck/http-response.adoc[]
+
+
+=== Patch health check data
+Using `PATCH` method, patch health check data
+
+==== Request
+include::{snippets}/patch-healthCheck/request-fields.adoc[]
+include::{snippets}/patch-healthCheck/http-request.adoc[]
+
+==== Response
+include::{snippets}/patch-healthCheck/response-fields.adoc[]
+include::{snippets}/patch-healthCheck/http-response.adoc[]
+
+
+=== Delete health check data
+Using `DELETE` method, delete health check data
+
+==== Request
+include::{snippets}/delete-healthCheck/path-parameters.adoc[]
+include::{snippets}/delete-healthCheck/http-request.adoc[]
+
+==== Response
+include::{snippets}/delete-healthCheck/response-fields.adoc[]
+include::{snippets}/delete-healthCheck/http-response.adoc[]
+
+== Mocking test
+=== Post External API Integration test(version 1)
+Using `POST` method, test internal & external API integration(version 1)
+
+==== Request
+include::{snippets}/post-external-api-integration-v1/request-fields.adoc[]
+include::{snippets}/post-external-api-integration-v1/http-request.adoc[]
+
+==== Response
+include::{snippets}/post-external-api-integration-v1/response-fields.adoc[]
+include::{snippets}/post-external-api-integration-v1/http-response.adoc[]
+
+
+=== Post External API Integration test(version 2)
+Using `POST` method, test internal & external API integration(version 2)
+
+==== Request
+include::{snippets}/post-external-api-integration-v2/request-fields.adoc[]
+include::{snippets}/post-external-api-integration-v2/http-request.adoc[]
+
+==== Response
+include::{snippets}/post-external-api-integration-v2/response-fields.adoc[]
+include::{snippets}/post-external-api-integration-v2/http-response.adoc[]

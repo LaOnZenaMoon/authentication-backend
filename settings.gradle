@@ -1,2 +1,4 @@
 include('core')
 include('jwt-api')
+include 'oauth-api'
+
