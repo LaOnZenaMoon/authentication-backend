@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/mainLayout}">
+
+<th:block layout:fragment="content">
+    <th:block th:replace="@{layout/mainLoadingBar.html} :: loadingBar"></th:block>
+
+    <div id="wrapper">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="text-center error-pages">
+                        <h1 class="error-title text-white"> 404</h1>
+                        <h2 class="error-sub-title text-white">404 not found</h2>
+
+                        <p class="error-message text-white text-uppercase">Sorry, an error has occured, Requested page not found!</p>
+                        
+                        <div class="mt-4">
+                          <a href="/pages/home" class="btn btn-light btn-round m-1">Go To Home </a>
+                          <a href="javascript:history.back();" class="btn btn-light btn-round m-1">Previous Page </a>
+                        </div>
+
+                        <div class="mt-4">
+                            <p class="text-white">Copyright © 2020
+                                LaOnZenaMoon > Jun Lee</p>
+                        </div>
+                           <hr class="w-50 border-light">
+                        <div class="mt-2">
+<!--                            <a href="javascript:void()" class="btn-social btn-social-circle waves-effect waves-light m-1"><i class="fa fa-facebook"></i></a>-->
+<!--                            <a href="javascript:void()" class="btn-social btn-social-circle waves-effect waves-light m-1"><i class="fa fa-google-plus"></i></a>-->
+<!--                            <a href="javascript:void()" class="btn-social btn-social-circle waves-effect waves-light m-1"><i class="fa fa-behance"></i></a>-->
+<!--                            <a href="javascript:void()" class="btn-social btn-social-circle waves-effect waves-light m-1"><i class="fa fa-dribbble"></i></a>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <th:block th:replace="@{layout/mainRightSidebar.html} :: sidebar"></th:block>
+    </div>
+</th:block>
+
+
+<th:block layout:fragment="customScript">
+    <script th:inline="javascript" type="text/javascript">
+        $(document).ready(function () {
+
+        });
+
+    </script>
+</th:block>
+
+</html>

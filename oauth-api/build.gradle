@@ -1,0 +1,73 @@
+plugins {
+    id 'org.asciidoctor.convert' version '2.4.0'
+}
+
+ext {
+    set('snippetsDir', file("build/generated-snippets"))
+}
+
+bootJar { enabled = true }
+jar { enabled = true }
+
+dependencies {
+    compile project(':core')
+
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    // httpclient
+    implementation 'org.apache.httpcomponents:httpclient:4.5.10'
+
+    // Eureka
+//    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+//    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+
+    // Thymeleaf
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+
+    // Runtime H2
+    implementation 'com.h2database:h2'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    // Spring REST Docs
+    testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+}
+
+// asciidoctor -- start
+asciidoctor {
+    inputs.dir snippetsDir
+    dependsOn test
+}
+
+bootJar {
+    dependsOn asciidoctor
+    from ("${asciidoctor.outputDir}/html5") {
+        into "BOOT-INF/classes/static/docs"
+    }
+}
+
+asciidoctor.doFirst {
+    println "===== start asciidoctor"
+    delete file('src/main/resources/static/docs')
+}
+
+asciidoctor.doLast {
+    println "===== finish asciidoctor"
+}
+
+task copyDocument(type: Copy) {
+    dependsOn asciidoctor
+    from file("build/asciidoc/html5")
+    into file("src/main/resources/static/docs")
+}
+
+build {
+    dependsOn copyDocument
+}
+
+test {
+    useJUnitPlatform()
+    outputs.dir snippetsDir
+}
+// asciidoctor -- end

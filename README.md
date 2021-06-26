@@ -6,6 +6,10 @@ Handles the user authentication through JWT
 * REST API Documentation
 * http://{{host}}:8890/swagger-ui.html
 
+## oauth-api
+Handles the user authentication through OAUTH
+* REST API Documentation
+
 ## core
 * common entities and utils
 
@@ -16,4 +20,4 @@ Handles the user authentication through JWT
 * JPA, Querydsl
 * Swagger
 * Junit5
-* JWT, HttpSession(will be developed)
+* JWT, HttpSession(will be developed), OAUTH
