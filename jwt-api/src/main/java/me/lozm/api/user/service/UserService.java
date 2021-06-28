@@ -8,7 +8,6 @@ import me.lozm.domain.user.repository.UserRepositorySupport;
 import me.lozm.domain.user.service.UserHelperService;
 import me.lozm.global.code.UseYn;
 import me.lozm.global.code.UsersType;
-import me.lozm.global.jwt.JwtTokenUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -18,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -43,6 +43,10 @@ public class UserService {
 
     @Transactional
     public User addUser(UserDto.AddRequest requestDto) {
+        final Optional<User> user = userHelperService.findUser(requestDto.getIdentifier(), UseYn.USE);
+        if (user.isPresent()) {
+            throw new IllegalArgumentException(String.format("이미 존재하는 사용자 계정입니다. 사용자 계정: [%s]", requestDto.getIdentifier()));
+        }
 
         return userRepository.save(User.builder()
                 .name(requestDto.getName())
