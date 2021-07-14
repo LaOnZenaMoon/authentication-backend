@@ -4,9 +4,21 @@ server:
 spring:
   application:
     name: auth-api
-  jpa.hibernate.ddl-auto: none
   profiles:
     active: local
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        default_batch_fetch_size: 1000
+        jdbc:
+          lob:
+            non_contextual_creation: true
+          batch_size: 1000
+        order_inserts: true
+        order_updates: true
+    open-in-view: false
 
 logging:
   level:
