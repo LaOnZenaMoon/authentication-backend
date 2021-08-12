@@ -1,0 +1,64 @@
+### Role 추가
+POST {{host}}/authorization/role
+Content-Type: application/json
+
+{
+  "roleName": "관리자",
+  "roleDescription": "전체 관리자 권한입니다."
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status == 200, "Response status is not 200");
+});
+%}
+
+
+### UserRole 추가
+POST {{host}}/authorization/user-role
+Content-Type: application/json
+
+{
+  "userId": 1,
+  "roleId": 1
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status == 200, "Response status is not 200");
+});
+%}
+
+
+### Resource 추가
+POST {{host}}/authorization/resource
+Content-Type: application/json
+
+{
+  "resourceName": "admin",
+  "resourceType": "URL",
+  "httpMethod": "POST",
+  "orderNumber": 1
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status == 200, "Response status is not 200");
+});
+%}
+
+
+### RoleResource 추가
+POST {{host}}/authorization/role-resource
+Content-Type: application/json
+
+{
+  "roleId": 1,
+  "resourceId": 1
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status == 200, "Response status is not 200");
+});
+%}

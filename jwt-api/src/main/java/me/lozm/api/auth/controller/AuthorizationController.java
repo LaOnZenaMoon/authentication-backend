@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import me.lozm.api.auth.service.AuthorizationService;
 import me.lozm.domain.auth.dto.AuthorizationDto;
+import me.lozm.global.security.UrlFilterInvocationSecurityMetadataSource;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -17,6 +18,7 @@ import javax.validation.Valid;
 public class AuthorizationController {
 
     private final AuthorizationService authorizationService;
+    private final UrlFilterInvocationSecurityMetadataSource urlFilterInvocationSecurityMetadataSource;
 
 
 //    @ApiOperation("인가(Authorization) 데이터 조회")

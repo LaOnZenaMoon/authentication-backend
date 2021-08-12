@@ -15,12 +15,11 @@ import me.lozm.domain.auth.service.RoleHelperService;
 import me.lozm.domain.user.entity.User;
 import me.lozm.domain.user.service.UserHelperService;
 import me.lozm.global.code.UseYn;
-import me.lozm.object.dto.SearchDto;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class AuthorizationService {
 
