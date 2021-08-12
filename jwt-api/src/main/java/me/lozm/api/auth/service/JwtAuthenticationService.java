@@ -3,7 +3,7 @@ package me.lozm.api.auth.service;
 import lombok.RequiredArgsConstructor;
 import me.lozm.domain.user.entity.User;
 import me.lozm.domain.user.service.UserHelperService;
-import me.lozm.domain.auth.vo.AuthVo;
+import me.lozm.domain.auth.vo.AuthenticationVo;
 import me.lozm.global.code.UseYn;
 import me.lozm.global.jwt.JwtTokenUtils;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,18 +23,18 @@ public class JwtAuthenticationService {
     private final UserHelperService userHelperService;
 
 
-    public AuthVo getToken(AuthVo authVo) {
-        authenticate(authVo.getIdentifier(), authVo.getPassword());
-        AuthVo userInfo = getAuthVoByUserIdentifier(authVo.getIdentifier());
+    public AuthenticationVo getToken(AuthenticationVo authenticationVo) {
+        authenticate(authenticationVo.getIdentifier(), authenticationVo.getPassword());
+        AuthenticationVo userInfo = getAuthVoByUserIdentifier(authenticationVo.getIdentifier());
         userInfo.setToken(jwtTokenUtils.generateToken(userInfo));
         return userInfo;
     }
 
 
-    private AuthVo getAuthVoByUserIdentifier(String username) {
+    private AuthenticationVo getAuthVoByUserIdentifier(String username) {
         User user = userHelperService.getUser(username, UseYn.USE);
 
-        return AuthVo.builder()
+        return AuthenticationVo.builder()
                 .id(user.getId())
                 .name(user.getName())
                 .identifier(user.getIdentifier())

@@ -31,11 +31,6 @@ jwt:
   token-prefix: Bearer
   header-string: Authorization
 
-decorator:
-  datasource:
-    p6spy:
-      enable-logging: true
-
 hystrix:
   command:
     default:
@@ -53,3 +48,13 @@ ribbon:
   MaxTotalConnections: 300
   MaxConnectionsPerHost: 100
   retryableStatusCodes: 500
+
+eureka:
+  client:
+    enabled: false
+
+decorator:
+  datasource:
+    p6spy:
+      enable-logging: false
+      log-format: '#%(connectionId) | %(executionTime)ms | %(category) | %(sql)'

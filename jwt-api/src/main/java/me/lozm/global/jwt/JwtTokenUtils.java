@@ -4,7 +4,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.RequiredArgsConstructor;
-import me.lozm.domain.auth.vo.AuthVo;
+import me.lozm.domain.auth.vo.AuthenticationVo;
 import me.lozm.global.properties.JwtProps;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -54,12 +54,12 @@ public class JwtTokenUtils implements Serializable {
         return doGenerateToken(claims, userDetails.getUsername());
     }
 
-    public String generateToken(AuthVo authVo) {
+    public String generateToken(AuthenticationVo authenticationVo) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("id", authVo.getId());
-        claims.put("name", authVo.getName());
+        claims.put("id", authenticationVo.getId());
+        claims.put("name", authenticationVo.getName());
 
-        return doGenerateToken(claims, authVo.getIdentifier());
+        return doGenerateToken(claims, authenticationVo.getIdentifier());
     }
 
     private String doGenerateToken(Map<String, Object> claims, String subject) {

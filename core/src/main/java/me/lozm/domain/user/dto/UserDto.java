@@ -1,8 +1,10 @@
 package me.lozm.domain.user.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import me.lozm.domain.user.entity.User;
 import me.lozm.global.code.UseYn;
 import me.lozm.global.code.UsersType;
@@ -66,7 +68,9 @@ public class UserDto {
     }
 
     @Getter
-    @Builder
+    @SuperBuilder
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class AddRequest extends BaseUserDto {
         @NotNull
         private String name;
@@ -82,7 +86,9 @@ public class UserDto {
     }
 
     @Getter
-    @Builder
+    @SuperBuilder
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class EditRequest extends BaseUserDto {
         @NotNull
         private Long id;
@@ -93,7 +99,9 @@ public class UserDto {
     }
 
     @Getter
+    @SuperBuilder
     @NoArgsConstructor
+    @AllArgsConstructor
     public static class RemoveRequest extends BaseUserDto {
         @NotNull
         private Long id;

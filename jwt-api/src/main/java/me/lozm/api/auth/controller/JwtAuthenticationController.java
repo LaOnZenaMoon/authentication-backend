@@ -4,8 +4,8 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import me.lozm.api.auth.service.JwtAuthenticationService;
-import me.lozm.domain.auth.dto.AuthDto;
-import me.lozm.domain.auth.vo.AuthVo;
+import me.lozm.domain.auth.dto.AuthenticationDto;
+import me.lozm.domain.auth.vo.AuthenticationVo;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -27,14 +27,14 @@ public class JwtAuthenticationController {
 
     @ApiOperation("JWT 인증토큰 발급")
     @PostMapping(AUTHENTICATE_PATH)
-    public AuthDto.Response createAuthenticationToken(@RequestBody @Valid AuthDto.Request requestDto) {
+    public AuthenticationDto.Response createAuthenticationToken(@RequestBody @Valid AuthenticationDto.Request requestDto) {
 
-        AuthVo jwt = jwtAuthenticationService.getToken(AuthVo.builder()
+        AuthenticationVo jwt = jwtAuthenticationService.getToken(AuthenticationVo.builder()
                 .identifier(requestDto.getIdentifier())
                 .password(requestDto.getPassword())
                 .build());
 
-        return AuthDto.Response.builder()
+        return AuthenticationDto.Response.builder()
                 .token(jwt.getToken())
                 .build();
     }
