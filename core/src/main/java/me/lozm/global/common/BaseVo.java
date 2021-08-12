@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 @Getter
 @SuperBuilder
 @NoArgsConstructor
-@AllArgsConstructor
 public class BaseVo {
 
     private LocalDateTime createDateTime;

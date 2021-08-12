@@ -13,7 +13,7 @@ import java.util.*;
 @RequiredArgsConstructor
 public class UrlFilterInvocationSecurityMetadataSource implements FilterInvocationSecurityMetadataSource {
 
-    private final LinkedHashMap<RequestMatcher, List<ConfigAttribute>> requestMap;
+    private final Map<RequestMatcher, List<ConfigAttribute>> requestMap;
     private final SecurityResourceService securityResourceService;
 
 
@@ -53,7 +53,7 @@ public class UrlFilterInvocationSecurityMetadataSource implements FilterInvocati
     public void reload() {
         requestMap.clear();
 
-        final LinkedHashMap<RequestMatcher, List<ConfigAttribute>> reloadedMap = securityResourceService.getResourceList();
+        final Map<RequestMatcher, List<ConfigAttribute>> reloadedMap = securityResourceService.getResourceList();
         final Iterator<Map.Entry<RequestMatcher, List<ConfigAttribute>>> iterator = reloadedMap.entrySet().iterator();
         while (iterator.hasNext()) {
             final Map.Entry<RequestMatcher, List<ConfigAttribute>> entry = iterator.next();

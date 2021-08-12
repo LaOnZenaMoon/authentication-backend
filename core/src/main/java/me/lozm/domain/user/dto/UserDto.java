@@ -1,6 +1,5 @@
 package me.lozm.domain.user.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -70,7 +69,6 @@ public class UserDto {
     @Getter
     @SuperBuilder
     @NoArgsConstructor
-    @AllArgsConstructor
     public static class AddRequest extends BaseUserDto {
         @NotNull
         private String name;
@@ -88,7 +86,6 @@ public class UserDto {
     @Getter
     @SuperBuilder
     @NoArgsConstructor
-    @AllArgsConstructor
     public static class EditRequest extends BaseUserDto {
         @NotNull
         private Long id;
@@ -101,7 +98,6 @@ public class UserDto {
     @Getter
     @SuperBuilder
     @NoArgsConstructor
-    @AllArgsConstructor
     public static class RemoveRequest extends BaseUserDto {
         @NotNull
         private Long id;

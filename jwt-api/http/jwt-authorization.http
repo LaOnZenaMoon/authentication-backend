@@ -3,8 +3,8 @@ POST {{host}}/authorization/role
 Content-Type: application/json
 
 {
-  "roleName": "관리자",
-  "roleDescription": "전체 관리자 권한입니다."
+  "roleName": "ROLE_MANAGER",
+  "roleDescription": "매니저 권한입니다."
 }
 
 > {%

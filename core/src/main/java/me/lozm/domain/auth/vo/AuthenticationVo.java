@@ -1,6 +1,5 @@
 package me.lozm.domain.auth.vo;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,7 +12,6 @@ import java.io.Serializable;
 @Getter
 @SuperBuilder
 @NoArgsConstructor
-@AllArgsConstructor
 public class AuthenticationVo extends BaseVo implements Serializable {
 
     private static final long serialVersionUID = 1000100010000000001L;

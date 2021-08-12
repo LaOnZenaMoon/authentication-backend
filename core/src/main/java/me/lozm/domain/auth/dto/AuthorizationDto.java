@@ -1,7 +1,5 @@
 package me.lozm.domain.auth.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -10,13 +8,10 @@ import me.lozm.domain.auth.entity.Role;
 import me.lozm.domain.auth.entity.RoleResource;
 import me.lozm.domain.auth.entity.UserRole;
 import me.lozm.global.code.ResourceType;
-import me.lozm.global.code.UseYn;
 import me.lozm.global.common.BaseUserDto;
-import org.springframework.data.domain.Page;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
 
 public class AuthorizationDto {
 
@@ -43,7 +38,6 @@ public class AuthorizationDto {
     @Getter
     @SuperBuilder
     @NoArgsConstructor
-    @AllArgsConstructor
     public static class RoleRequest extends BaseUserDto {
         @NotEmpty
         private String roleName;
@@ -55,7 +49,6 @@ public class AuthorizationDto {
     @Getter
     @SuperBuilder
     @NoArgsConstructor
-    @AllArgsConstructor
     public static class RoleResponse extends RoleRequest {
 
         private Long roleId;
@@ -72,7 +65,6 @@ public class AuthorizationDto {
     @Getter
     @SuperBuilder
     @NoArgsConstructor
-    @AllArgsConstructor
     public static class UserRoleRequest extends BaseUserDto {
         @NotNull
         private Long userId;
@@ -84,7 +76,6 @@ public class AuthorizationDto {
     @Getter
     @SuperBuilder
     @NoArgsConstructor
-    @AllArgsConstructor
     public static class UserRoleResponse extends UserRoleRequest {
 
         private Long userRoleId;
@@ -102,7 +93,6 @@ public class AuthorizationDto {
     @Getter
     @SuperBuilder
     @NoArgsConstructor
-    @AllArgsConstructor
     public static class ResourceRequest extends BaseUserDto {
         @NotEmpty
         private String resourceName;
@@ -120,7 +110,6 @@ public class AuthorizationDto {
     @Getter
     @SuperBuilder
     @NoArgsConstructor
-    @AllArgsConstructor
     public static class ResourceResponse extends ResourceRequest {
 
         private Long resourceId;
@@ -139,7 +128,6 @@ public class AuthorizationDto {
     @Getter
     @SuperBuilder
     @NoArgsConstructor
-    @AllArgsConstructor
     public static class RoleResourceRequest extends BaseUserDto {
         @NotNull
         private Long roleId;
@@ -151,7 +139,6 @@ public class AuthorizationDto {
     @Getter
     @SuperBuilder
     @NoArgsConstructor
-    @AllArgsConstructor
     public static class RoleResourceResponse extends RoleResourceRequest {
 
         private Long roleResourceId;

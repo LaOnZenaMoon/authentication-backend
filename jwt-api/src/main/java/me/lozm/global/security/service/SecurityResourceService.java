@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -23,8 +24,8 @@ public class SecurityResourceService {
 
 
     @Transactional(readOnly = true)
-    public LinkedHashMap<RequestMatcher, List<ConfigAttribute>> getResourceList() {
-        LinkedHashMap<RequestMatcher, List<ConfigAttribute>> resourceMap = new LinkedHashMap<>();
+    public Map<RequestMatcher, List<ConfigAttribute>> getResourceList() {
+        Map<RequestMatcher, List<ConfigAttribute>> resourceMap = new LinkedHashMap<>();
 
         List<Resource> resourceList = resourceRepository.findAllResources(ResourceType.URL);
 

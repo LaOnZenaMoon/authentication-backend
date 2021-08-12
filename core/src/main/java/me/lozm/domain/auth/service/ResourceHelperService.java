@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+import static java.lang.String.format;
+
 @Service
 @RequiredArgsConstructor
 public class ResourceHelperService {
@@ -22,7 +24,7 @@ public class ResourceHelperService {
 
     public Resource getResource(Long resourceId) {
         return findResource(resourceId)
-                .orElseThrow(() -> new IllegalArgumentException(String.format("존재하지 않는 Resource 입니다. Resource ID: [%d]", resourceId)));
+                .orElseThrow(() -> new IllegalArgumentException(format("존재하지 않는 Resource 입니다. Resource ID: [%d]", resourceId)));
     }
 
 }

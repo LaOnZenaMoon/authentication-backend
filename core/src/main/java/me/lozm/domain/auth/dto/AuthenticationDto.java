@@ -1,6 +1,5 @@
 package me.lozm.domain.auth.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +14,6 @@ public class AuthenticationDto {
     @Getter
     @SuperBuilder
     @NoArgsConstructor
-    @AllArgsConstructor
     public static class Request extends BaseUserDto {
         @NotEmpty
         private String identifier;
