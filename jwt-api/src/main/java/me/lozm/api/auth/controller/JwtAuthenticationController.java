@@ -19,7 +19,7 @@ import javax.validation.Valid;
 @RequiredArgsConstructor
 public class JwtAuthenticationController {
 
-    public static final String AUTHENTICATE_PATH = "/authenticate";
+    public static final String AUTHENTICATE_PATH = "/authentication";
 
 
     private final JwtAuthenticationService jwtAuthenticationService;

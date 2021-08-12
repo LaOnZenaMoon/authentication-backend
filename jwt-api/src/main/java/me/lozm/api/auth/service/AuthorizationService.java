@@ -19,6 +19,9 @@ import me.lozm.global.security.UrlFilterInvocationSecurityMetadataSource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import static java.lang.String.format;
+import static me.lozm.global.config.CommonConfig.ROLE_NAME_PREFIX;
+
 @Service
 @RequiredArgsConstructor
 public class AuthorizationService {
@@ -37,8 +40,8 @@ public class AuthorizationService {
     public Role addRole(AuthorizationDto.RoleRequest requestDto) {
 
         // validate RoleVoter > prefix
-        if (!requestDto.getRoleName().startsWith("ROLE_")) {
-            throw new IllegalArgumentException("Role 이름은 [ROLE_] 을 접미사로 사용해야 합니다.");
+        if (!requestDto.getRoleName().startsWith(ROLE_NAME_PREFIX)) {
+            throw new IllegalArgumentException(format("Role 이름은 [%s] 을 접미사로 사용해야 합니다.", ROLE_NAME_PREFIX));
         }
 
         final Role role = roleRepository.save(Role.builder()

@@ -1,5 +1,5 @@
 ### JWT 인증토큰 발급
-POST {{host}}/authenticate
+POST {{host}}/authentication
 Content-Type: application/json
 
 {

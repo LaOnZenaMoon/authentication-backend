@@ -8,8 +8,8 @@ import me.lozm.global.jwt.JwtAuthenticationEntryPoint;
 import me.lozm.global.jwt.JwtRequestFilter;
 import me.lozm.global.security.UrlFilterInvocationSecurityMetadataSource;
 import me.lozm.global.security.factory.UrlResourceMapFactoryBean;
+import me.lozm.global.security.filter.PermitAllFilter;
 import me.lozm.global.security.service.SecurityResourceService;
-import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +21,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -73,29 +72,34 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .maxSessionsPreventsLogin(true);
 
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
-                .addFilterBefore(customFilterSecurityInterceptor(), FilterSecurityInterceptor.class);
+                .addFilterAt(customFilterSecurityInterceptor(), FilterSecurityInterceptor.class);
 
         httpSecurity.authorizeRequests()
-                .antMatchers(JwtAuthenticationController.AUTHENTICATE_PATH).permitAll()
-                .antMatchers(UserController.USER_PATH + "/**").permitAll()
                 .anyRequest().authenticated();
     }
 
-    @Override
-    public void configure(WebSecurity web) {
-        web.ignoring().antMatchers(
-                "/v2/api-docs", "/configuration/ui", "/swagger-resources/**",
-                "/configuration/security", "/swagger-ui.html", "/webjars/**",
-                "/swagger/**", "/h2-console/**");
-    }
+//    @Override
+//    public void configure(WebSecurity web) {
+//        web.ignoring().antMatchers(
+//                "/v2/api-docs", "/configuration/ui", "/swagger-resources/**",
+//                "/configuration/security", "/swagger-ui.html", "/webjars/**",
+//                "/swagger/**", "/h2-console/**");
+//    }
 
     @Bean
-    public FilterSecurityInterceptor customFilterSecurityInterceptor() throws Exception {
-        FilterSecurityInterceptor filterSecurityInterceptor = new FilterSecurityInterceptor();
-        filterSecurityInterceptor.setSecurityMetadataSource(urlFilterInvocationSecurityMetadataSource());
-        filterSecurityInterceptor.setAccessDecisionManager(affirmativeBased());
-        filterSecurityInterceptor.setAuthenticationManager(authenticationManagerBean());
-        return filterSecurityInterceptor;
+    public PermitAllFilter customFilterSecurityInterceptor() throws Exception {
+        String[] permitAllResourceArray = {
+                "/v2/api-docs", "/configuration/ui", "/swagger-resources/**",
+                "/configuration/security", "/swagger-ui.html", "/webjars/**",
+                "/swagger/**", "/h2-console/**", JwtAuthenticationController.AUTHENTICATE_PATH,
+                UserController.USER_PATH + "/**"
+        };
+
+        PermitAllFilter permitAllFilter = new PermitAllFilter(permitAllResourceArray);
+        permitAllFilter.setSecurityMetadataSource(urlFilterInvocationSecurityMetadataSource());
+        permitAllFilter.setAccessDecisionManager(affirmativeBased());
+        permitAllFilter.setAuthenticationManager(authenticationManagerBean());
+        return permitAllFilter;
     }
 
     @Bean
