@@ -5,7 +5,6 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import me.lozm.api.auth.service.AuthorizationService;
 import me.lozm.domain.auth.dto.AuthorizationDto;
-import me.lozm.global.security.UrlFilterInvocationSecurityMetadataSource;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -48,6 +47,12 @@ public class AuthorizationController {
     @PostMapping("role-resource")
     public AuthorizationDto.RoleResourceResponse addRoleResource(@RequestBody @Valid AuthorizationDto.RoleResourceRequest requestDto) {
         return AuthorizationDto.RoleResourceResponse.from(authorizationService.addRoleResource(requestDto));
+    }
+
+    @ApiOperation("RoleHierarchy 추가")
+    @PostMapping("role-hierarchy")
+    public AuthorizationDto.RoleHierarchyResponse addRoleHierarchy(@RequestBody @Valid AuthorizationDto.RoleHierarchyRequest requestDto) {
+        return AuthorizationDto.RoleHierarchyResponse.from(authorizationService.addRoleHierarchy(requestDto));
     }
 
 }

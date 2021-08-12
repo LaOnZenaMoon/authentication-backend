@@ -3,10 +3,7 @@ package me.lozm.domain.auth.dto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import me.lozm.domain.auth.entity.Resource;
-import me.lozm.domain.auth.entity.Role;
-import me.lozm.domain.auth.entity.RoleResource;
-import me.lozm.domain.auth.entity.UserRole;
+import me.lozm.domain.auth.entity.*;
 import me.lozm.global.code.ResourceType;
 import me.lozm.global.object.dto.BaseUserDto;
 
@@ -147,6 +144,37 @@ public class AuthorizationDto {
             return RoleResourceResponse.builder()
                     .roleId(roleResource.getRole().getId())
                     .resourceId(roleResource.getResource().getId())
+                    .build();
+        }
+    }
+
+    @Getter
+    @SuperBuilder
+    @NoArgsConstructor
+    public static class RoleHierarchyRequest extends BaseUserDto {
+        @NotNull
+        private Long roleId;
+
+        private Long parentRoleId;
+    }
+
+    @Getter
+    @SuperBuilder
+    @NoArgsConstructor
+    public static class RoleHierarchyResponse extends RoleHierarchyRequest {
+
+        private Long roleHierarchyId;
+        private String roleName;
+        private String parentRoleName;
+
+
+        public static RoleHierarchyResponse from(RoleHierarchy roleHierarchy) {
+            return RoleHierarchyResponse.builder()
+                    .roleHierarchyId(roleHierarchy.getId())
+                    .roleId(roleHierarchy.getRole().getId())
+                    .roleName(roleHierarchy.getRole().getRoleName())
+                    .parentRoleId(roleHierarchy.getParentRole().getId())
+                    .parentRoleName(roleHierarchy.getParentRole().getRoleName())
                     .build();
         }
     }

@@ -2,14 +2,8 @@ package me.lozm.api.auth.service;
 
 import lombok.RequiredArgsConstructor;
 import me.lozm.domain.auth.dto.AuthorizationDto;
-import me.lozm.domain.auth.entity.Resource;
-import me.lozm.domain.auth.entity.Role;
-import me.lozm.domain.auth.entity.RoleResource;
-import me.lozm.domain.auth.entity.UserRole;
-import me.lozm.domain.auth.repository.ResourceRepository;
-import me.lozm.domain.auth.repository.RoleRepository;
-import me.lozm.domain.auth.repository.RoleResourceRepository;
-import me.lozm.domain.auth.repository.UserRoleRepository;
+import me.lozm.domain.auth.entity.*;
+import me.lozm.domain.auth.repository.*;
 import me.lozm.domain.auth.service.ResourceHelperService;
 import me.lozm.domain.auth.service.RoleHelperService;
 import me.lozm.domain.user.entity.User;
@@ -19,8 +13,11 @@ import me.lozm.global.security.UrlFilterInvocationSecurityMetadataSource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 import static java.lang.String.format;
 import static me.lozm.global.config.CommonConfig.ROLE_NAME_PREFIX;
+import static org.apache.commons.lang3.ObjectUtils.isNotEmpty;
 
 @Service
 @RequiredArgsConstructor
@@ -34,6 +31,7 @@ public class AuthorizationService {
     private final ResourceHelperService resourceHelperService;
     private final RoleResourceRepository roleResourceRepository;
     private final UrlFilterInvocationSecurityMetadataSource urlFilterInvocationSecurityMetadataSource;
+    private final RoleHierarchyRepository roleHierarchyRepository;
 
 
     @Transactional
@@ -96,6 +94,30 @@ public class AuthorizationService {
         urlFilterInvocationSecurityMetadataSource.reload();
 
         return roleResource;
+    }
+
+    @Transactional
+    public RoleHierarchy addRoleHierarchy(AuthorizationDto.RoleHierarchyRequest requestDto) {
+        final Role role = roleHelperService.getRole(requestDto.getRoleId());
+
+        Role parentRole = null;
+        if (isNotEmpty(requestDto.getParentRoleId())) {
+            parentRole = roleHelperService.getRole(requestDto.getParentRoleId());
+        }
+
+        final Optional<RoleHierarchy> byRoleAndParentRole = roleHierarchyRepository.findByRoleAndParentRole(role, parentRole);
+        if (byRoleAndParentRole.isPresent()) {
+            String parentRoleName = parentRole == null ? null : parentRole.getRoleName();
+            throw new IllegalArgumentException(String.format("이미 존재하는 RoleHierarchy 입니다. Role 이름: [%s], Parent Role 이름: [%s]",
+                    role.getRoleName(), parentRoleName));
+        }
+
+        final RoleHierarchy roleHierarchy = roleHierarchyRepository.save(RoleHierarchy.builder()
+                .role(role)
+                .parentRole(parentRole)
+                .build());
+
+        return roleHierarchy;
     }
 
 }
