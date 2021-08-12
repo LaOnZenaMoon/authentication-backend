@@ -9,6 +9,7 @@ import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -21,6 +22,7 @@ public class SecurityResourceService {
     private final ResourceRepository resourceRepository;
 
 
+    @Transactional(readOnly = true)
     public LinkedHashMap<RequestMatcher, List<ConfigAttribute>> getResourceList() {
         LinkedHashMap<RequestMatcher, List<ConfigAttribute>> resourceMap = new LinkedHashMap<>();
 
@@ -30,8 +32,8 @@ public class SecurityResourceService {
             List<ConfigAttribute> configAttributeList = new ArrayList<>();
             resource.getRoleResources().forEach(roleResource -> {
                 configAttributeList.add(new SecurityConfig(roleResource.getRole().getRoleName()));
-                resourceMap.put(new AntPathRequestMatcher(resource.getResourceName()), configAttributeList);
             });
+            resourceMap.put(new AntPathRequestMatcher(resource.getResourceName()), configAttributeList);
         });
 
         return resourceMap;

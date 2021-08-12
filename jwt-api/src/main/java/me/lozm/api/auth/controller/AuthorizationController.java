@@ -18,7 +18,6 @@ import javax.validation.Valid;
 public class AuthorizationController {
 
     private final AuthorizationService authorizationService;
-    private final UrlFilterInvocationSecurityMetadataSource urlFilterInvocationSecurityMetadataSource;
 
 
 //    @ApiOperation("인가(Authorization) 데이터 조회")
