@@ -1,4 +1,4 @@
-package me.lozm.global.common;
+package me.lozm.global.object.dto;
 
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;

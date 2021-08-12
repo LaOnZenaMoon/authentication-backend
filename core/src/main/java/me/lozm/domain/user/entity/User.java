@@ -9,7 +9,7 @@ import me.lozm.domain.auth.entity.UserRole;
 import me.lozm.global.code.UseYn;
 import me.lozm.global.code.UsersType;
 import me.lozm.global.code.converter.UsersTypeConverter;
-import me.lozm.global.common.BaseEntity;
+import me.lozm.global.object.entity.BaseEntity;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.ObjectUtils;
 

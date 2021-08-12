@@ -4,7 +4,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
-import me.lozm.global.common.BaseUserDto;
+import me.lozm.global.object.dto.BaseUserDto;
 
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;

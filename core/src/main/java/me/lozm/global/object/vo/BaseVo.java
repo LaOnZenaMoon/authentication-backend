@@ -1,6 +1,5 @@
-package me.lozm.global.common;
+package me.lozm.global.object.vo;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;

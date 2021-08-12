@@ -5,7 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 import me.lozm.global.code.UsersType;
-import me.lozm.global.common.BaseVo;
+import me.lozm.global.object.vo.BaseVo;
 
 import java.io.Serializable;
 

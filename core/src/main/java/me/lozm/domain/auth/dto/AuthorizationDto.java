@@ -8,7 +8,7 @@ import me.lozm.domain.auth.entity.Role;
 import me.lozm.domain.auth.entity.RoleResource;
 import me.lozm.domain.auth.entity.UserRole;
 import me.lozm.global.code.ResourceType;
-import me.lozm.global.common.BaseUserDto;
+import me.lozm.global.object.dto.BaseUserDto;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
