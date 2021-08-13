@@ -45,6 +45,7 @@ public class SecurityResourceService {
         return resourceMap;
     }
 
+    //TODO Access IP 데이터 변경 시, reload 하는 기능 추가
     public List<String> getAccessIpList() {
         return accessIpRepository.findAllByUse(UseYn.USE)
                 .stream()

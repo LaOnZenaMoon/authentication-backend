@@ -100,10 +100,10 @@ public class SetupDataConfig implements ApplicationListener<ContextRefreshedEven
 
     private List<Resource> setupResourceData() {
         return Arrays.asList(
-                getResource("/admin/**", 1),
-                getResource("/manager/**", 2),
-                getResource("/user/**", 3),
-                getResource("/guest/**", 4)
+                getResource("/**/admin/**", 1),
+                getResource("/**/manager/**", 2),
+                getResource("/**/user/**", 3),
+                getResource("/**/guest/**", 4)
         );
     }
 

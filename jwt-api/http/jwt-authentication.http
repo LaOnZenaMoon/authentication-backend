@@ -42,3 +42,18 @@ client.test("Request executed successfully", function() {
   client.assert(response.status == 200, "Response status is not 200");
 });
 %}
+
+### JWT 인증토큰 발급 > 방문자
+POST {{host}}/authentication
+Content-Type: application/json
+
+{
+  "identifier": "guest",
+  "password": "asdfasdf1234"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status == 200, "Response status is not 200");
+});
+%}

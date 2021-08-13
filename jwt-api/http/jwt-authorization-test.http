@@ -1,6 +1,6 @@
 ### 인가(Authorization) 테스트 > ROLE_ADMIN 인가 테스트
-GET {{host}}/authorization/test/role-admin
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYW5hZ2VyIiwibmFtZSI6IuunpOuLiOyggCIsImlkIjo1MiwiZXhwIjoxNjI4ODUwMzU5LCJpYXQiOjE2Mjg4MzIzNTl9.E96pb_qFlr33zuFquJ7ghrEHlv_Ax29_2frrMe56vklGRwdN4T1M6nX7zOl_MJhYO1ZyOJ3vVld9rBy89uDcwg
+GET {{host}}/authorization/admin/test
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwibmFtZSI6IuydvOuwmCDsgqzsmqnsnpAiLCJpZCI6NTMsImV4cCI6MTYyODg0Mzc0NSwiaWF0IjoxNjI4ODI1NzQ1fQ.LFt4BoXGVnOjLtLi9v7AjWas1PppDbEkTXIwnQXUbVv2ev1-4SPbiwHsG18AqYLvGQk2sSvWT7bCcTTZfJe_gg
 
 > {%
 client.test("Request executed successfully", function() {
@@ -11,7 +11,7 @@ client.test("Request executed successfully", function() {
 
 
 ### 인가(Authorization) 테스트 > ROLE_MANAGER 인가 테스트
-GET {{host}}/authorization/test/role-manager
+GET {{host}}/authorization/manager/test
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwibmFtZSI6IuydvOuwmCDsgqzsmqnsnpAiLCJpZCI6NTMsImV4cCI6MTYyODg0Mzc0NSwiaWF0IjoxNjI4ODI1NzQ1fQ.LFt4BoXGVnOjLtLi9v7AjWas1PppDbEkTXIwnQXUbVv2ev1-4SPbiwHsG18AqYLvGQk2sSvWT7bCcTTZfJe_gg
 
 > {%
@@ -22,8 +22,8 @@ client.test("Request executed successfully", function() {
 
 
 ### 인가(Authorization) 테스트 > ROLE_USER 인가 테스트
-GET {{host}}/authorization/test/role-user
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwibmFtZSI6IuydvOuwmCDsgqzsmqnsnpAiLCJpZCI6NTMsImV4cCI6MTYyODg0Mzc4MSwiaWF0IjoxNjI4ODI1NzgxfQ.fgG8yapGlxCHDSDWKKFvNXbTZPdvbTwEwx4e0H3MOhCcCQ66ZNknaMLqSkdBdIVWYZYSPn9FNA0-24mq9RKOjA
+GET {{host}}/authorization/user/test
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwibmFtZSI6IuydvOuwmCDsgqzsmqnsnpAiLCJpZCI6NTMsImV4cCI6MTYyODg0Mzc0NSwiaWF0IjoxNjI4ODI1NzQ1fQ.LFt4BoXGVnOjLtLi9v7AjWas1PppDbEkTXIwnQXUbVv2ev1-4SPbiwHsG18AqYLvGQk2sSvWT7bCcTTZfJe_gg
 
 > {%
 client.test("Request executed successfully", function() {
@@ -33,7 +33,7 @@ client.test("Request executed successfully", function() {
 
 
 ### 인가(Authorization) 테스트 > ROLE_GUEST 인가 테스트
-GET {{host}}/authorization/test/role-guest
+GET {{host}}/authorization/guest/test
 Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwibmFtZSI6IuydvOuwmCDsgqzsmqnsnpAiLCJpZCI6NTMsImV4cCI6MTYyODg0Mzc0NSwiaWF0IjoxNjI4ODI1NzQ1fQ.LFt4BoXGVnOjLtLi9v7AjWas1PppDbEkTXIwnQXUbVv2ev1-4SPbiwHsG18AqYLvGQk2sSvWT7bCcTTZfJe_gg
 
 > {%

@@ -1,9 +1,7 @@
 package me.lozm.global.config;
 
 import lombok.RequiredArgsConstructor;
-import me.lozm.api.auth.controller.JwtAuthenticationController;
 import me.lozm.api.auth.service.UserDetailsServiceImpl;
-import me.lozm.api.user.controller.UserController;
 import me.lozm.global.jwt.JwtAuthenticationEntryPoint;
 import me.lozm.global.jwt.JwtRequestFilter;
 import me.lozm.global.security.UrlFilterInvocationSecurityMetadataSource;
@@ -92,10 +90,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public PermitAllFilter customFilterSecurityInterceptor() throws Exception {
         String[] permitAllResourceArray = {
-                "/v2/api-docs", "/configuration/ui", "/swagger-resources/**",
-                "/configuration/security", "/swagger-ui.html", "/webjars/**",
-                "/swagger/**", "/h2-console/**", JwtAuthenticationController.AUTHENTICATE_PATH,
-                UserController.USER_PATH + "/**"
+//                "/v2/api-docs", "/configuration/ui", "/swagger-resources/**",
+//                "/configuration/security", "/swagger-ui.html", "/webjars/**",
+//                "/swagger/**", "/h2-console/**", JwtAuthenticationController.AUTHENTICATE_PATH,
+//                UserController.USER_PATH + "/**"
         };
 
         PermitAllFilter permitAllFilter = new PermitAllFilter(permitAllResourceArray);
@@ -106,7 +104,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public FilterInvocationSecurityMetadataSource urlFilterInvocationSecurityMetadataSource() throws Exception {
+    public FilterInvocationSecurityMetadataSource urlFilterInvocationSecurityMetadataSource() {
         return new UrlFilterInvocationSecurityMetadataSource(urlResourceMapFactoryBean().getObject(), securityResourceService);
     }
 
@@ -123,8 +121,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //        return Arrays.asList(new RoleVoter());
         List<AccessDecisionVoter<? extends Object>> accessDecisionVoterList = new ArrayList<>();
         accessDecisionVoterList.add(new IpAddressVoter(securityResourceService));
-        accessDecisionVoterList.add(new RoleHierarchyVoter(roleHierarchy()));
+        accessDecisionVoterList.add(roleHierarchyVoter());
         return accessDecisionVoterList;
+    }
+
+    @Bean
+    public AccessDecisionVoter<? extends Object> roleHierarchyVoter() {
+        return new RoleHierarchyVoter(roleHierarchy());
     }
 
     @Bean

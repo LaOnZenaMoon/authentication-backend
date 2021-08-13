@@ -4,6 +4,7 @@ import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.lozm.api.auth.service.UserDetailsServiceImpl;
+import me.lozm.global.properties.JwtProps;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,16 +25,17 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     private final UserDetailsServiceImpl userDetailsService;
     private final JwtTokenUtils jwtTokenUtils;
+    private final JwtProps jwtProps;
 
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        final String requestTokenHeader = request.getHeader("Authorization");
+        final String requestTokenHeader = request.getHeader(jwtProps.getHeaderString());
 
         String username = null;
         String jwtToken = null;
 
-        if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
+        if (requestTokenHeader != null && requestTokenHeader.startsWith(jwtProps.getTokenPrefix() + " ")) {
             jwtToken = requestTokenHeader.substring(7);
             try {
                 username = jwtTokenUtils.getUsernameFromToken(jwtToken);
