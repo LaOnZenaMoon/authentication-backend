@@ -81,10 +81,10 @@ POST {{host}}/authorization/resource
 Content-Type: application/json
 
 {
-  "resourceName": "admin",
+  "resourceName": "/authorization/test/role-guest",
   "resourceType": "URL",
-  "httpMethod": "POST",
-  "orderNumber": 1
+  "httpMethod": "GET",
+  "orderNumber": 2
 }
 
 > {%
@@ -99,8 +99,8 @@ POST {{host}}/authorization/role-resource
 Content-Type: application/json
 
 {
-  "roleId": 1,
-  "resourceId": 1
+  "roleId": 4,
+  "resourceId": 4
 }
 
 > {%

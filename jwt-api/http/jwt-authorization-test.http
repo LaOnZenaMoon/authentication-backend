@@ -1,0 +1,39 @@
+### 인가(Authorization) 테스트 > ROLE_ADMIN 인가 테스트
+GET {{host}}/authorization/test/role-admin
+#Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsIm5hbWUiOiLqtIDrpqzsnpAiLCJpZCI6MSwiZXhwIjoxNjI4ODQwMjk4LCJpYXQiOjE2Mjg4MjIyOTh9.ilYrRx2W4sdbpiFvVjj32npNVE47EryvYHQwYfheCzY2bKDJQDj_cbu36TkBMHSeNgA7DkZzAhcGfc4Icmfpjw
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status == 200, "Response status is not 200");
+});
+%}
+
+
+### 인가(Authorization) 테스트 > ROLE_MANAGER 인가 테스트
+GET {{host}}/authorization/test/role-manager
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status == 200, "Response status is not 200");
+});
+%}
+
+
+### 인가(Authorization) 테스트 > ROLE_USER 인가 테스트
+GET {{host}}/authorization/test/role-user
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status == 200, "Response status is not 200");
+});
+%}
+
+
+### 인가(Authorization) 테스트 > ROLE_GUEST 인가 테스트
+GET {{host}}/authorization/test/role-guest
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status == 200, "Response status is not 200");
+});
+%}
