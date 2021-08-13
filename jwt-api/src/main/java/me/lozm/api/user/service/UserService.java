@@ -15,11 +15,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-@Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class UserService {
 
@@ -46,12 +46,13 @@ public class UserService {
         }
 
         return userRepository.save(User.builder()
+                .createdBy(requestDto.getCreatedBy())
+                .createdDateTime(LocalDateTime.now())
+                .use(UseYn.USE)
                 .name(requestDto.getName())
                 .identifier(requestDto.getIdentifier())
                 .password(passwordEncoder.encode(requestDto.getPassword()))
                 .type(requestDto.getType())
-                .createdBy(requestDto.getCreatedBy())
-                .use(UseYn.USE)
                 .build());
     }
 

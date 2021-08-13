@@ -1,6 +1,6 @@
 ### 인가(Authorization) 테스트 > ROLE_ADMIN 인가 테스트
 GET {{host}}/authorization/test/role-admin
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYW5hZ2VyIiwibmFtZSI6IuunpOuLiOyggCIsImlkIjo1MiwiZXhwIjoxNjI4ODQzNTQ1LCJpYXQiOjE2Mjg4MjU1NDV9._HmHK9zgGD7vTUN3_SZ3wMxdBR8DLqzEz7eQT6ti0BUfmJ8XcdPcJiW6U67McbOSieLLpd5wCnnsUFNyaIcMDQ
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYW5hZ2VyIiwibmFtZSI6IuunpOuLiOyggCIsImlkIjo1MiwiZXhwIjoxNjI4ODUwMzU5LCJpYXQiOjE2Mjg4MzIzNTl9.E96pb_qFlr33zuFquJ7ghrEHlv_Ax29_2frrMe56vklGRwdN4T1M6nX7zOl_MJhYO1ZyOJ3vVld9rBy89uDcwg
 
 > {%
 client.test("Request executed successfully", function() {

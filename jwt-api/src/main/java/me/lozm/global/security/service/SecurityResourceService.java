@@ -1,9 +1,12 @@
 package me.lozm.global.security.service;
 
 import lombok.RequiredArgsConstructor;
+import me.lozm.domain.auth.entity.AccessIp;
 import me.lozm.domain.auth.entity.Resource;
+import me.lozm.domain.auth.repository.AccessIpRepository;
 import me.lozm.domain.auth.repository.ResourceRepository;
 import me.lozm.global.code.ResourceType;
+import me.lozm.global.code.UseYn;
 import org.springframework.security.access.ConfigAttribute;
 import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
@@ -15,12 +18,14 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class SecurityResourceService {
 
     private final ResourceRepository resourceRepository;
+    private final AccessIpRepository accessIpRepository;
 
 
     @Transactional(readOnly = true)
@@ -38,6 +43,13 @@ public class SecurityResourceService {
         });
 
         return resourceMap;
+    }
+
+    public List<String> getAccessIpList() {
+        return accessIpRepository.findAllByUse(UseYn.USE)
+                .stream()
+                .map(AccessIp::getIpAddress)
+                .collect(Collectors.toList());
     }
 
 }

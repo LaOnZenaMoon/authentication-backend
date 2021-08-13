@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface ResourceRepository extends JpaRepository<Resource, Long> {
 
@@ -14,5 +15,7 @@ public interface ResourceRepository extends JpaRepository<Resource, Long> {
             "WHERE R.resourceType = :resourceType " +
             "ORDER BY R.orderNumber DESC")
     List<Resource> findAllResources(ResourceType resourceType);
+
+    Optional<Resource> findByResourceName(String resourceName);
 
 }

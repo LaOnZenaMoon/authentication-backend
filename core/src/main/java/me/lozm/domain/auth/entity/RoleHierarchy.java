@@ -1,12 +1,17 @@
 package me.lozm.domain.auth.entity;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+import me.lozm.global.object.entity.BaseEntity;
 import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
 
 @Getter
-@Builder
+@SuperBuilder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 
@@ -14,17 +19,11 @@ import javax.persistence.*;
 @DynamicInsert
 @Table(schema = "LOZM", name = "AUTH_ROLE_HIERARCHY")
 @SequenceGenerator(name = "AUTH_ROLE_HIERARCHY_SEQ_GEN", sequenceName = "AUTH_ROLE_HIERARCHY_SEQ", allocationSize = 1)
-public class RoleHierarchy {
+public class RoleHierarchy extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "AUTH_ROLE_HIERARCHY_SEQ_GEN")
     private Long id;
-
-//    @Column(name = "CHILD_ROLE_ID")
-//    private Long childRoleId;
-//
-//    @Column(name = "CHILD_ROLE_NAME")
-//    private String childName;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ROLE_ID")
@@ -33,18 +32,5 @@ public class RoleHierarchy {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PARENT_ROLE_ID")
     private Role parentRole;
-
-//    @Column(name = "PARENT_ROLE_ID")
-//    private Long parentRoleId;
-//
-//    @Column(name = "PARENT_ROLE_NAME")
-//    private String parentName;
-
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "PARENT_ROLE_ID", referencedColumnName = "CHILD_ROLE_ID", insertable = false, updatable = false)
-//    private RoleHierarchy parentRoleHierarchy;
-
-//    @OneToMany(mappedBy = "parentRoleHierarchy", cascade={CascadeType.ALL})
-//    private List<RoleHierarchy> roleHierarchies;
 
 }

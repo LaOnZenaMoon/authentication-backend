@@ -1,21 +1,26 @@
 package me.lozm.domain.auth.entity;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import me.lozm.global.code.ResourceType;
 import me.lozm.global.code.converter.ResourceTypeConverter;
+import me.lozm.global.object.entity.BaseEntity;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Getter
-@Builder
+@SuperBuilder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 
 @Entity
 @Table(schema = "LOZM", name = "AUTH_RESOURCE")
 @SequenceGenerator(name = "AUTH_RESOURCE_SEQ_GEN", sequenceName = "AUTH_RESOURCE_SEQ", allocationSize = 1)
-public class Resource {
+public class Resource extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "AUTH_RESOURCE_SEQ_GEN")

@@ -18,10 +18,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public abstract class BaseEntity {
 
-    @Column(name = "CREATED_DATETIME", updatable = false)
+    @Column(name = "CREATED_DATE", updatable = false)
     private LocalDateTime createdDateTime;
 
-    @Column(name = "MODIFIED_DATETIME")
+    @Column(name = "MODIFIED_DATE")
     private LocalDateTime modifiedDateTime;
 
     @Setter
@@ -29,7 +29,7 @@ public abstract class BaseEntity {
     private Long createdBy;
 
     @Setter
-    @Column(name = "MODIFY_BY")
+    @Column(name = "MODIFIED_BY")
     private Long modifiedBy;
 
     @Setter

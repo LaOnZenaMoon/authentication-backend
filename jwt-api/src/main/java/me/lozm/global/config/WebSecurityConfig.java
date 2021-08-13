@@ -10,6 +10,7 @@ import me.lozm.global.security.UrlFilterInvocationSecurityMetadataSource;
 import me.lozm.global.security.factory.UrlResourceMapFactoryBean;
 import me.lozm.global.security.filter.PermitAllFilter;
 import me.lozm.global.security.service.SecurityResourceService;
+import me.lozm.global.security.voter.IpAddressVoter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -66,6 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf().disable();
 
+        //TODO Load access denied page
         httpSecurity.exceptionHandling()
                 .authenticationEntryPoint(jwtAuthenticationEntryPoint).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
@@ -120,13 +122,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private List<AccessDecisionVoter<?>> getAccessDecisionVoters() {
 //        return Arrays.asList(new RoleVoter());
         List<AccessDecisionVoter<? extends Object>> accessDecisionVoterList = new ArrayList<>();
-        accessDecisionVoterList.add(roleVoter());
+        accessDecisionVoterList.add(new IpAddressVoter(securityResourceService));
+        accessDecisionVoterList.add(new RoleHierarchyVoter(roleHierarchy()));
         return accessDecisionVoterList;
-    }
-
-    @Bean
-    public AccessDecisionVoter<? extends Object> roleVoter() {
-        return new RoleHierarchyVoter(roleHierarchy());
     }
 
     @Bean

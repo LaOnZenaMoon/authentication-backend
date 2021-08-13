@@ -13,6 +13,7 @@ import me.lozm.global.security.UrlFilterInvocationSecurityMetadataSource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static java.lang.String.format;
@@ -43,6 +44,9 @@ public class AuthorizationService {
         }
 
         final Role role = roleRepository.save(Role.builder()
+                .createdBy(requestDto.getCreatedBy())
+                .createdDateTime(LocalDateTime.now())
+                .use(UseYn.USE)
                 .roleName(requestDto.getRoleName())
                 .roleDescription(requestDto.getRoleDescription())
                 .build());
@@ -58,6 +62,9 @@ public class AuthorizationService {
         final Role role = roleHelperService.getRole(requestDto.getRoleId());
 
         final UserRole userRole = userRoleRepository.save(UserRole.builder()
+                .createdBy(requestDto.getCreatedBy())
+                .createdDateTime(LocalDateTime.now())
+                .use(UseYn.USE)
                 .user(user)
                 .role(role)
                 .build());
@@ -70,6 +77,9 @@ public class AuthorizationService {
     @Transactional
     public Resource addResource(AuthorizationDto.ResourceRequest requestDto) {
         final Resource resource = resourceRepository.save(Resource.builder()
+                .createdBy(requestDto.getCreatedBy())
+                .createdDateTime(LocalDateTime.now())
+                .use(UseYn.USE)
                 .resourceName(requestDto.getResourceName())
                 .resourceType(requestDto.getResourceType())
                 .httpMethod(requestDto.getHttpMethod())
@@ -87,6 +97,9 @@ public class AuthorizationService {
         final Resource resource = resourceHelperService.getResource(requestDto.getResourceId());
 
         final RoleResource roleResource = roleResourceRepository.save(RoleResource.builder()
+                .createdBy(requestDto.getCreatedBy())
+                .createdDateTime(LocalDateTime.now())
+                .use(UseYn.USE)
                 .role(role)
                 .resource(resource)
                 .build());
@@ -113,6 +126,9 @@ public class AuthorizationService {
         }
 
         final RoleHierarchy roleHierarchy = roleHierarchyRepository.save(RoleHierarchy.builder()
+                .createdBy(requestDto.getCreatedBy())
+                .createdDateTime(LocalDateTime.now())
+                .use(UseYn.USE)
                 .role(role)
                 .parentRole(parentRole)
                 .build());
