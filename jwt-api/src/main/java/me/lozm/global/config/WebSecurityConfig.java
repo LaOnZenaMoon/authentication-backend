@@ -68,9 +68,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         httpSecurity.exceptionHandling()
                 .authenticationEntryPoint(jwtAuthenticationEntryPoint).and()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .maximumSessions(1)
-                .maxSessionsPreventsLogin(true);
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+//                .maximumSessions(1)
+//                .maxSessionsPreventsLogin(true);
 
         httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
                 .addFilterAt(customFilterSecurityInterceptor(), FilterSecurityInterceptor.class);

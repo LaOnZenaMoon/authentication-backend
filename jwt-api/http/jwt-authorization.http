@@ -65,8 +65,8 @@ POST {{host}}/authorization/user-role
 Content-Type: application/json
 
 {
-  "userId": 1,
-  "roleId": 1
+  "userId": 53,
+  "roleId": 3
 }
 
 > {%

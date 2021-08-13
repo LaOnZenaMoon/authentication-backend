@@ -1,4 +1,4 @@
-### 사용자 추가
+### 사용자 추가 > 관리자
 POST {{host}}/user
 Content-Type: application/json
 
@@ -7,6 +7,42 @@ Content-Type: application/json
   "identifier": "admin",
   "password": "asdfasdf1234",
   "type": "ADMIN"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status == 200, "Response status is not 200");
+  client.global.set("userId", response.body.id);
+});
+%}
+
+### 사용자 추가 > 매니저
+POST {{host}}/user
+Content-Type: application/json
+
+{
+  "name": "매니저",
+  "identifier": "manager",
+  "password": "asdfasdf1234",
+  "type": "USER"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status == 200, "Response status is not 200");
+  client.global.set("userId", response.body.id);
+});
+%}
+
+### 사용자 추가 > 일반 사용자
+POST {{host}}/user
+Content-Type: application/json
+
+{
+  "name": "일반 사용자",
+  "identifier": "user",
+  "password": "asdfasdf1234",
+  "type": "USER"
 }
 
 > {%

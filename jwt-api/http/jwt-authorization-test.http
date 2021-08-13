@@ -1,6 +1,6 @@
 ### 인가(Authorization) 테스트 > ROLE_ADMIN 인가 테스트
 GET {{host}}/authorization/test/role-admin
-#Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsIm5hbWUiOiLqtIDrpqzsnpAiLCJpZCI6MSwiZXhwIjoxNjI4ODQwMjk4LCJpYXQiOjE2Mjg4MjIyOTh9.ilYrRx2W4sdbpiFvVjj32npNVE47EryvYHQwYfheCzY2bKDJQDj_cbu36TkBMHSeNgA7DkZzAhcGfc4Icmfpjw
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYW5hZ2VyIiwibmFtZSI6IuunpOuLiOyggCIsImlkIjo1MiwiZXhwIjoxNjI4ODQzNTQ1LCJpYXQiOjE2Mjg4MjU1NDV9._HmHK9zgGD7vTUN3_SZ3wMxdBR8DLqzEz7eQT6ti0BUfmJ8XcdPcJiW6U67McbOSieLLpd5wCnnsUFNyaIcMDQ
 
 > {%
 client.test("Request executed successfully", function() {
@@ -9,8 +9,10 @@ client.test("Request executed successfully", function() {
 %}
 
 
+
 ### 인가(Authorization) 테스트 > ROLE_MANAGER 인가 테스트
 GET {{host}}/authorization/test/role-manager
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwibmFtZSI6IuydvOuwmCDsgqzsmqnsnpAiLCJpZCI6NTMsImV4cCI6MTYyODg0Mzc0NSwiaWF0IjoxNjI4ODI1NzQ1fQ.LFt4BoXGVnOjLtLi9v7AjWas1PppDbEkTXIwnQXUbVv2ev1-4SPbiwHsG18AqYLvGQk2sSvWT7bCcTTZfJe_gg
 
 > {%
 client.test("Request executed successfully", function() {
@@ -21,6 +23,7 @@ client.test("Request executed successfully", function() {
 
 ### 인가(Authorization) 테스트 > ROLE_USER 인가 테스트
 GET {{host}}/authorization/test/role-user
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwibmFtZSI6IuydvOuwmCDsgqzsmqnsnpAiLCJpZCI6NTMsImV4cCI6MTYyODg0Mzc4MSwiaWF0IjoxNjI4ODI1NzgxfQ.fgG8yapGlxCHDSDWKKFvNXbTZPdvbTwEwx4e0H3MOhCcCQ66ZNknaMLqSkdBdIVWYZYSPn9FNA0-24mq9RKOjA
 
 > {%
 client.test("Request executed successfully", function() {
@@ -31,6 +34,7 @@ client.test("Request executed successfully", function() {
 
 ### 인가(Authorization) 테스트 > ROLE_GUEST 인가 테스트
 GET {{host}}/authorization/test/role-guest
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwibmFtZSI6IuydvOuwmCDsgqzsmqnsnpAiLCJpZCI6NTMsImV4cCI6MTYyODg0Mzc0NSwiaWF0IjoxNjI4ODI1NzQ1fQ.LFt4BoXGVnOjLtLi9v7AjWas1PppDbEkTXIwnQXUbVv2ev1-4SPbiwHsG18AqYLvGQk2sSvWT7bCcTTZfJe_gg
 
 > {%
 client.test("Request executed successfully", function() {
