@@ -1,0 +1,140 @@
+### Role 추가 > ROLE_ADMIN
+POST {{host}}/authorization/role
+Content-Type: application/json
+
+{
+  "roleName": "ROLE_ADMIN",
+  "roleDescription": "ROLE_ADMIN 권한입니다."
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status == 200, "Response status is not 200");
+});
+%}
+
+### Role 추가 > ROLE_MANAGER
+POST {{host}}/authorization/role
+Content-Type: application/json
+
+{
+  "roleName": "ROLE_MANAGER",
+  "roleDescription": "ROLE_MANAGER 권한입니다."
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status == 200, "Response status is not 200");
+});
+%}
+
+### Role 추가 > ROLE_USER
+POST {{host}}/authorization/role
+Content-Type: application/json
+
+{
+  "roleName": "ROLE_USER",
+  "roleDescription": "ROLE_USER 권한입니다."
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status == 200, "Response status is not 200");
+});
+%}
+
+### Role 추가 > ROLE_GUEST
+POST {{host}}/authorization/role
+Content-Type: application/json
+
+{
+  "roleName": "ROLE_GUEST",
+  "roleDescription": "ROLE_GUEST 권한입니다."
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status == 200, "Response status is not 200");
+});
+%}
+
+
+
+### UserRole 추가
+POST {{host}}/authorization/user-role
+Content-Type: application/json
+
+{
+  "userId": 53,
+  "roleId": 3
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status == 200, "Response status is not 200");
+});
+%}
+
+
+### Resource 추가
+POST {{host}}/authorization/resource
+Content-Type: application/json
+
+{
+  "resourceName": "/authorization/test/role-guest",
+  "resourceType": "URL",
+  "httpMethod": "GET",
+  "orderNumber": 2
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status == 200, "Response status is not 200");
+});
+%}
+
+
+### RoleResource 추가
+POST {{host}}/authorization/role-resource
+Content-Type: application/json
+
+{
+  "roleId": 4,
+  "resourceId": 4
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status == 200, "Response status is not 200");
+});
+%}
+
+
+### RoleHierarchy 추가 > parent
+POST {{host}}/authorization/role-hierarchy
+Content-Type: application/json
+
+{
+  "roleId": 2,
+  "parentRoleId": 1
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status == 200, "Response status is not 200");
+});
+%}
+
+### RoleHierarchy 추가 > non-parent
+POST {{host}}/authorization/role-hierarchy
+Content-Type: application/json
+
+{
+  "roleId": 1
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status == 200, "Response status is not 200");
+});
+%}

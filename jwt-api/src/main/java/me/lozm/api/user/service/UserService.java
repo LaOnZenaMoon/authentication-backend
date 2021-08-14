@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import me.lozm.domain.user.dto.UserDto;
 import me.lozm.domain.user.entity.User;
 import me.lozm.domain.user.repository.UserRepository;
-import me.lozm.domain.user.repository.UserRepositorySupport;
 import me.lozm.domain.user.service.UserHelperService;
 import me.lozm.global.code.UseYn;
 import me.lozm.global.code.UsersType;
@@ -16,6 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,18 +26,16 @@ public class UserService {
 
     private final UserRepository userRepository;
     private final UserHelperService userHelperService;
-    private final UserRepositorySupport userRepositorySupport;
     private final PasswordEncoder passwordEncoder;
 
 
     public Page<User> getUserList(UsersType usersType, Pageable pageable) {
-        List<User> userList = userRepositorySupport.getUserListByUsersType(usersType, pageable);
-        long totalCount = userRepositorySupport.getUserTotalCountByUsersType(usersType);
+        List<User> userList = userRepository.getUserListByUsersType(usersType, pageable);
+        long totalCount = userRepository.getUserTotalCountByUsersType(usersType);
         return new PageImpl<>(userList, pageable, totalCount);
     }
 
     public User getUserDetail(Long userId) {
-
         return userHelperService.getUser(userId, UseYn.USE);
     }
 
@@ -49,18 +47,18 @@ public class UserService {
         }
 
         return userRepository.save(User.builder()
+                .createdBy(requestDto.getCreatedBy())
+                .createdDateTime(LocalDateTime.now())
+                .use(UseYn.USE)
                 .name(requestDto.getName())
                 .identifier(requestDto.getIdentifier())
                 .password(passwordEncoder.encode(requestDto.getPassword()))
                 .type(requestDto.getType())
-                .createdBy(requestDto.getCreatedBy())
-                .use(UseYn.USE)
                 .build());
     }
 
     @Transactional
     public User editUser(UserDto.EditRequest requestDto) {
-
         User user = userHelperService.getUser(requestDto.getId(), UseYn.USE);
 
         String password = requestDto.getPassword();
@@ -72,7 +70,6 @@ public class UserService {
 
     @Transactional
     public User removeUser(Long userId) {
-
         User user = userHelperService.getUser(userId, UseYn.USE);
         user.edit(null, null, null, null, UseYn.NOT_USE);
         return user;

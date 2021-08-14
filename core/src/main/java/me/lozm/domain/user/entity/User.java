@@ -1,25 +1,31 @@
 package me.lozm.domain.user.entity;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import me.lozm.domain.auth.entity.UserRole;
 import me.lozm.global.code.UseYn;
 import me.lozm.global.code.UsersType;
-import me.lozm.global.code.converter.UseYnConverter;
 import me.lozm.global.code.converter.UsersTypeConverter;
-import me.lozm.global.common.BaseEntity;
+import me.lozm.global.object.entity.BaseEntity;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.ObjectUtils;
 
 import javax.persistence.*;
+import java.util.List;
 
 
-@Entity
-@Table(schema = "LOZM", name = "USERS")
+
 @Getter
 @SuperBuilder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
-@SequenceGenerator(name = "USER_SEQ_GEN", sequenceName = "USER_SEQ", initialValue = 1, allocationSize = 50)
+
+@Entity
+@Table(schema = "LOZM", name = "USERS")
+@SequenceGenerator(name = "USER_SEQ_GEN", sequenceName = "USER_SEQ")
 public class User extends BaseEntity {
 
     @Id
@@ -39,6 +45,9 @@ public class User extends BaseEntity {
     @Column(name = "TYPE")
     @Convert(converter = UsersTypeConverter.class)
     private UsersType type;
+
+    @OneToMany(mappedBy = "user")
+    private List<UserRole> userRoles;
 
 
     public void edit(String name, String encodedPassword, UsersType type, Long modifiedBy, UseYn use) {

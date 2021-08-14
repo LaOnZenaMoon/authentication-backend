@@ -1,9 +1,54 @@
-### JWT 인증토큰 발급
-POST {{host}}/authenticate
+### JWT 인증토큰 발급 > 관리자
+POST {{host}}/authentication
 Content-Type: application/json
 
 {
   "identifier": "admin",
+  "password": "asdfasdf1234"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status == 200, "Response status is not 200");
+});
+%}
+
+### JWT 인증토큰 발급 > 매니저
+POST {{host}}/authentication
+Content-Type: application/json
+
+{
+  "identifier": "manager",
+  "password": "asdfasdf1234"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status == 200, "Response status is not 200");
+});
+%}
+
+### JWT 인증토큰 발급 > 일반 사용자
+POST {{host}}/authentication
+Content-Type: application/json
+
+{
+  "identifier": "user",
+  "password": "asdfasdf1234"
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status == 200, "Response status is not 200");
+});
+%}
+
+### JWT 인증토큰 발급 > 방문자
+POST {{host}}/authentication
+Content-Type: application/json
+
+{
+  "identifier": "guest",
   "password": "asdfasdf1234"
 }
 

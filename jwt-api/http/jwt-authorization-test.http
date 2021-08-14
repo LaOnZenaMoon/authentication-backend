@@ -1,0 +1,43 @@
+### 인가(Authorization) 테스트 > ROLE_ADMIN 인가 테스트
+GET {{host}}/authorization/admin/test
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwibmFtZSI6IuydvOuwmCDsgqzsmqnsnpAiLCJpZCI6NTMsImV4cCI6MTYyODg0Mzc0NSwiaWF0IjoxNjI4ODI1NzQ1fQ.LFt4BoXGVnOjLtLi9v7AjWas1PppDbEkTXIwnQXUbVv2ev1-4SPbiwHsG18AqYLvGQk2sSvWT7bCcTTZfJe_gg
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status == 200, "Response status is not 200");
+});
+%}
+
+
+
+### 인가(Authorization) 테스트 > ROLE_MANAGER 인가 테스트
+GET {{host}}/authorization/manager/test
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwibmFtZSI6IuydvOuwmCDsgqzsmqnsnpAiLCJpZCI6NTMsImV4cCI6MTYyODg0Mzc0NSwiaWF0IjoxNjI4ODI1NzQ1fQ.LFt4BoXGVnOjLtLi9v7AjWas1PppDbEkTXIwnQXUbVv2ev1-4SPbiwHsG18AqYLvGQk2sSvWT7bCcTTZfJe_gg
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status == 200, "Response status is not 200");
+});
+%}
+
+
+### 인가(Authorization) 테스트 > ROLE_USER 인가 테스트
+GET {{host}}/authorization/user/test
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwibmFtZSI6IuydvOuwmCDsgqzsmqnsnpAiLCJpZCI6NTMsImV4cCI6MTYyODg0Mzc0NSwiaWF0IjoxNjI4ODI1NzQ1fQ.LFt4BoXGVnOjLtLi9v7AjWas1PppDbEkTXIwnQXUbVv2ev1-4SPbiwHsG18AqYLvGQk2sSvWT7bCcTTZfJe_gg
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status == 200, "Response status is not 200");
+});
+%}
+
+
+### 인가(Authorization) 테스트 > ROLE_GUEST 인가 테스트
+GET {{host}}/authorization/guest/test
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwibmFtZSI6IuydvOuwmCDsgqzsmqnsnpAiLCJpZCI6NTMsImV4cCI6MTYyODg0Mzc0NSwiaWF0IjoxNjI4ODI1NzQ1fQ.LFt4BoXGVnOjLtLi9v7AjWas1PppDbEkTXIwnQXUbVv2ev1-4SPbiwHsG18AqYLvGQk2sSvWT7bCcTTZfJe_gg
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status == 200, "Response status is not 200");
+});
+%}

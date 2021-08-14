@@ -2,14 +2,18 @@ package me.lozm.domain.auth.dto;
 
 import lombok.Builder;
 import lombok.Getter;
-import me.lozm.global.common.BaseUserDto;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+import me.lozm.global.object.dto.BaseUserDto;
 
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
-public class AuthDto {
+public class AuthenticationDto {
 
     @Getter
+    @SuperBuilder
+    @NoArgsConstructor
     public static class Request extends BaseUserDto {
         @NotEmpty
         private String identifier;
@@ -18,8 +22,9 @@ public class AuthDto {
         private String password;
     }
 
-    @Getter @Builder
-    static public class Response implements Serializable {
+    @Getter
+    @Builder
+    public static class Response implements Serializable {
         private static final long serialVersionUID = -8091879091924046844L;
         private String token;
     }

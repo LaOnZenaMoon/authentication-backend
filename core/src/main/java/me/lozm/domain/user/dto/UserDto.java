@@ -3,10 +3,11 @@ package me.lozm.domain.user.dto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import me.lozm.domain.user.entity.User;
 import me.lozm.global.code.UseYn;
 import me.lozm.global.code.UsersType;
-import me.lozm.global.common.BaseUserDto;
+import me.lozm.global.object.dto.BaseUserDto;
 import org.springframework.data.domain.Page;
 
 import javax.validation.constraints.NotNull;
@@ -66,7 +67,8 @@ public class UserDto {
     }
 
     @Getter
-    @Builder
+    @SuperBuilder
+    @NoArgsConstructor
     public static class AddRequest extends BaseUserDto {
         @NotNull
         private String name;
@@ -82,7 +84,8 @@ public class UserDto {
     }
 
     @Getter
-    @Builder
+    @SuperBuilder
+    @NoArgsConstructor
     public static class EditRequest extends BaseUserDto {
         @NotNull
         private Long id;
@@ -93,6 +96,7 @@ public class UserDto {
     }
 
     @Getter
+    @SuperBuilder
     @NoArgsConstructor
     public static class RemoveRequest extends BaseUserDto {
         @NotNull

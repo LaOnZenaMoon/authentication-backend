@@ -15,11 +15,12 @@ import static me.lozm.domain.user.entity.QUser.user;
 
 @Repository
 @RequiredArgsConstructor
-public class UserRepositorySupport {
+public class UserRepositoryImpl implements UserRepositoryCustom {
 
     private final JPAQueryFactory jpaQueryFactory;
 
 
+    @Override
     public List<User> getUserListByUsersType(UsersType usersType, Pageable pageable) {
         return jpaQueryFactory
                 .select(user)
@@ -33,6 +34,7 @@ public class UserRepositorySupport {
                 .fetch();
     }
 
+    @Override
     public long getUserTotalCountByUsersType(UsersType usersType) {
         return jpaQueryFactory
                 .select(user)
@@ -43,7 +45,8 @@ public class UserRepositorySupport {
                 .fetchCount();
     }
 
-    private BooleanExpression checkUsersType(UsersType usersType) {
+    @Override
+    public BooleanExpression checkUsersType(UsersType usersType) {
         if (usersType.equals(UsersType.ALL)) {
             return null;
         }
