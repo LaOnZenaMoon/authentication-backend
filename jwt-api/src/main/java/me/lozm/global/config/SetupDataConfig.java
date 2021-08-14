@@ -166,13 +166,14 @@ public class SetupDataConfig implements ApplicationListener<ContextRefreshedEven
     }
 
     private void setupAccessIpData() {
-        Optional<AccessIp> accessIp = accessIpRepository.findByIpAddressAndUse("0:0:0:0:0:0:0:1", UseYn.USE);
+        final String LOCAL_HOST = "127.0.0.1";
+        Optional<AccessIp> accessIp = accessIpRepository.findByIpAddressAndUse(LOCAL_HOST, UseYn.USE);
         if (!accessIp.isPresent()) {
             accessIpRepository.save(AccessIp.builder()
                     .createdBy(UsersType.SYSTEM.getCode())
                     .createdDateTime(LocalDateTime.now())
                     .use(UseYn.USE)
-                    .ipAddress("0:0:0:0:0:0:0:1")
+                    .ipAddress(LOCAL_HOST)
                     .build());
         }
     }
