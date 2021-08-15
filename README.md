@@ -5,6 +5,7 @@
 Handles the user authentication through JWT
 * REST API Documentation
 * http://{{host}}:8890/swagger-ui.html
+* Authorization based on URL or HTTP Method
 
 ## oauth-api
 Handles the user authentication through OAUTH
