@@ -93,8 +93,40 @@ client.test("Request executed successfully", function() {
 });
 %}
 
+### Resource 추가 > Boart 추가
+POST {{host}}/authorization/resource
+Content-Type: application/json
 
-### RoleResource 추가
+{
+  "resourceName": "/community-api/board",
+  "resourceType": "URL",
+  "httpMethod": "POST",
+  "orderNumber": 2
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status == 200, "Response status is not 200");
+});
+%}
+
+
+### RoleResource 추가 > Boart 추가
+POST {{host}}/authorization/role-resource
+Content-Type: application/json
+
+{
+  "roleId": 1,
+  "resourceId": 6
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status == 200, "Response status is not 200");
+});
+%}
+
+### RoleResource 추가 >
 POST {{host}}/authorization/role-resource
 Content-Type: application/json
 
@@ -108,7 +140,6 @@ client.test("Request executed successfully", function() {
   client.assert(response.status == 200, "Response status is not 200");
 });
 %}
-
 
 ### RoleHierarchy 추가 > parent
 POST {{host}}/authorization/role-hierarchy

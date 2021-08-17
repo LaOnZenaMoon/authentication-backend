@@ -5,6 +5,13 @@
 Handles the user authentication through JWT
 * REST API Documentation
 * http://{{host}}:8890/swagger-ui.html
+* (Optional) Load the initial sample data
+* Add the below code in application.yml
+```
+lozm:
+  data:
+    enabled: true
+```
 
 ## oauth-api
 Handles the user authentication through OAUTH
