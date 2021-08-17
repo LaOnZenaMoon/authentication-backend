@@ -132,8 +132,8 @@ public class InitialDataConfig {
     private List<Resource> setupResourceData() {
         return Arrays.asList(
                 getResource("/user/**", 1),
-                getResource("/community-api/board", 2),
-                getResource("/community-api/comment", 3)
+                getResource("/community-api/board/**", 2),
+                getResource("/community-api/comment/**", 3)
         );
     }
 

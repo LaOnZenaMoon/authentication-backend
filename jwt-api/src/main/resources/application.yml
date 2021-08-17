@@ -22,7 +22,7 @@ spring:
 
 logging:
   level:
-    root: info
+    root: debug
     me.lozm: debug
 
 jwt:
@@ -70,4 +70,4 @@ zuul:
   ribbon-isolation-strategy: thread
   thread-pool:
     use-separate-thread-pools: true
-    thread-pool-key-prefix: gateway-server
+    thread-pool-key-prefix: auth-api

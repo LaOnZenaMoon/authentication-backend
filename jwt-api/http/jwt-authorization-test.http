@@ -64,7 +64,7 @@ client.test("Request executed successfully", function() {
 
 
 ### 인가(Authorization) 테스트 > 댓글 조회 테스트
-GET {{host}}/community-api/comment/board/1
+GET {{host}}/community-api/board/boardType/MARKET?pageSize=10&pageNumber=0
 
 > {%
 client.test("Request executed successfully", function() {
@@ -72,3 +72,4 @@ client.test("Request executed successfully", function() {
   client.global.set("boardId", response.body.commentList.content[0].id);
 });
 %}
+
