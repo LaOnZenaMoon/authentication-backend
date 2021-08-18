@@ -1,6 +1,6 @@
 ### 인가(Authorization) 테스트 > ROLE_ADMIN 인가 테스트
 GET {{host}}/authorization/admin/test
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYW5hZ2VyIiwibmFtZSI6IuunpOuLiOyggCIsImlkIjoyLCJleHAiOjE2Mjg4NjE4ODgsImlhdCI6MTYyODg0Mzg4OH0.95S9bzqICEM4jwHvj_dhbiUC2PS2haNvD75c6cf0ing4lXTdtoHMwvwTQoawe-m1SYKMH27AMWjWyuv2QXMJRw
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYW5hZ2VyIiwibmFtZSI6IuunpOuLiOyggCIsImlkIjoyLCJleHAiOjE2MjkyMDUyMDUsImlhdCI6MTYyOTE4NzIwNX0.M-cO9FN-aGemAIUrsho3qLNHaPtwUUCinFrmdG3wKFEUfc2qTp7ymJkaN-U_E2n5fGi0HhOLmiBtSIO6EuXKXg
 
 > {%
 client.test("Request executed successfully", function() {
@@ -12,7 +12,7 @@ client.test("Request executed successfully", function() {
 
 ### 인가(Authorization) 테스트 > ROLE_MANAGER 인가 테스트
 GET {{host}}/authorization/manager/test
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYW5hZ2VyIiwibmFtZSI6IuunpOuLiOyggCIsImlkIjoyLCJleHAiOjE2Mjg4NjE4ODgsImlhdCI6MTYyODg0Mzg4OH0.95S9bzqICEM4jwHvj_dhbiUC2PS2haNvD75c6cf0ing4lXTdtoHMwvwTQoawe-m1SYKMH27AMWjWyuv2QXMJRw
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYW5hZ2VyIiwibmFtZSI6IuunpOuLiOyggCIsImlkIjoyLCJleHAiOjE2MjkyMDUyMDUsImlhdCI6MTYyOTE4NzIwNX0.M-cO9FN-aGemAIUrsho3qLNHaPtwUUCinFrmdG3wKFEUfc2qTp7ymJkaN-U_E2n5fGi0HhOLmiBtSIO6EuXKXg
 
 > {%
 client.test("Request executed successfully", function() {
@@ -23,7 +23,7 @@ client.test("Request executed successfully", function() {
 
 ### 인가(Authorization) 테스트 > ROLE_USER 인가 테스트
 GET {{host}}/authorization/user/test
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwibmFtZSI6IuydvOuwmCDsgqzsmqnsnpAiLCJpZCI6NTMsImV4cCI6MTYyODg0Mzc0NSwiaWF0IjoxNjI4ODI1NzQ1fQ.LFt4BoXGVnOjLtLi9v7AjWas1PppDbEkTXIwnQXUbVv2ev1-4SPbiwHsG18AqYLvGQk2sSvWT7bCcTTZfJe_gg
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtYW5hZ2VyIiwibmFtZSI6IuunpOuLiOyggCIsImlkIjoyLCJleHAiOjE2MjkyMDUyMDUsImlhdCI6MTYyOTE4NzIwNX0.M-cO9FN-aGemAIUrsho3qLNHaPtwUUCinFrmdG3wKFEUfc2qTp7ymJkaN-U_E2n5fGi0HhOLmiBtSIO6EuXKXg
 
 > {%
 client.test("Request executed successfully", function() {
@@ -41,3 +41,35 @@ client.test("Request executed successfully", function() {
   client.assert(response.status == 200, "Response status is not 200");
 });
 %}
+
+
+### 인가(Authorization) 테스트 > 게시판 추가 테스트
+POST {{host}}/community-api/board
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwibmFtZSI6IuyCrOyaqeyekCIsImlkIjozLCJleHAiOjE2MjkyMTUyNjIsImlhdCI6MTYyOTE5NzI2Mn0.1w5nwrHjEb1ePZTwNmV7hfY2rTYNxVNPVgani01kYt4D61o_aK1KO0zY99qdsoFxWqAJmH4E8tI2j0pxOKF4QQ
+
+{
+  "boardType": "ALL",
+  "contentType": "GENERAL",
+  "title": "Where can I get some?",
+  "content": "There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc."
+}
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status == 200, "Response status is not 200");
+  client.global.set("boardId", response.body.id);
+});
+%}
+
+
+### 인가(Authorization) 테스트 > 댓글 조회 테스트
+GET {{host}}/community-api/board/boardType/MARKET?pageSize=10&pageNumber=0
+
+> {%
+client.test("Request executed successfully", function() {
+  client.assert(response.status == 200, "Response status is not 200");
+  client.global.set("boardId", response.body.commentList.content[0].id);
+});
+%}
+

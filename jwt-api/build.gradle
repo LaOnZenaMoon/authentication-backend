@@ -23,4 +23,8 @@ dependencies {
     // Runtime H2
     implementation 'com.h2database:h2'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+    // Spring Cloud & Zuul Gateway
+    implementation 'org.springframework.retry:spring-retry'
+    implementation 'org.springframework.cloud:spring-cloud-starter-netflix-zuul'
 }

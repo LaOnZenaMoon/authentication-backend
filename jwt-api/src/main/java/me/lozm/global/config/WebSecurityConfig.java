@@ -2,6 +2,9 @@ package me.lozm.global.config;
 
 import lombok.RequiredArgsConstructor;
 import me.lozm.api.auth.service.UserDetailsServiceImpl;
+import me.lozm.global.filters.FilterChaneExceptionHandler;
+import me.lozm.global.filters.PreFilter;
+import me.lozm.global.jwt.JwtAccessDeniedHandler;
 import me.lozm.global.jwt.JwtAuthenticationEntryPoint;
 import me.lozm.global.jwt.JwtRequestFilter;
 import me.lozm.global.security.UrlFilterInvocationSecurityMetadataSource;
@@ -29,6 +32,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 import org.springframework.security.web.access.intercept.FilterSecurityInterceptor;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.CorsUtils;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,8 +49,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsServiceImpl userDetailsService;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
     private final JwtRequestFilter jwtRequestFilter;
     private final SecurityResourceService securityResourceService;
+    private final FilterChaneExceptionHandler filterChaneExceptionHandler;
 
 
     @Autowired
@@ -67,35 +77,39 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         //TODO Load access denied page
         httpSecurity.exceptionHandling()
-                .authenticationEntryPoint(jwtAuthenticationEntryPoint).and()
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                .accessDeniedHandler(jwtAccessDeniedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-//                .maximumSessions(1)
-//                .maxSessionsPreventsLogin(true);
 
-        httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
+        httpSecurity
+                .addFilterBefore(filterChaneExceptionHandler, WebAsyncManagerIntegrationFilter.class)
+                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
                 .addFilterAt(customFilterSecurityInterceptor(), FilterSecurityInterceptor.class);
 
         httpSecurity.authorizeRequests()
+                .requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
                 .anyRequest().authenticated();
+
+        httpSecurity.cors()
+                .configurationSource(corsConfigurationSource());
     }
 
-//    @Override
-//    public void configure(WebSecurity web) {
-//        web.ignoring().antMatchers(
-//                "/v2/api-docs", "/configuration/ui", "/swagger-resources/**",
-//                "/configuration/security", "/swagger-ui.html", "/webjars/**",
-//                "/swagger/**", "/h2-console/**");
-//    }
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.addAllowedOrigin(CorsConfiguration.ALL);
+        configuration.addAllowedMethod(CorsConfiguration.ALL);
+        configuration.addAllowedHeader(CorsConfiguration.ALL);
+        configuration.setAllowCredentials(true);
+        configuration.setMaxAge(3600L);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
 
     @Bean
     public PermitAllFilter customFilterSecurityInterceptor() throws Exception {
-        String[] permitAllResourceArray = {
-//                "/v2/api-docs", "/configuration/ui", "/swagger-resources/**",
-//                "/configuration/security", "/swagger-ui.html", "/webjars/**",
-//                "/swagger/**", "/h2-console/**", JwtAuthenticationController.AUTHENTICATE_PATH,
-//                UserController.USER_PATH + "/**"
-        };
-
+        String[] permitAllResourceArray = {};
         PermitAllFilter permitAllFilter = new PermitAllFilter(permitAllResourceArray);
         permitAllFilter.setSecurityMetadataSource(urlFilterInvocationSecurityMetadataSource());
         permitAllFilter.setAccessDecisionManager(affirmativeBased());
@@ -133,6 +147,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public RoleHierarchyImpl roleHierarchy() {
         return new RoleHierarchyImpl();
+    }
+
+    @Bean
+    public PreFilter preFilter() {
+        return new PreFilter();
     }
 
 }

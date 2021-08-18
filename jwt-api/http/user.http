@@ -1,6 +1,7 @@
 ### 사용자 추가 > 관리자
 POST {{host}}/user
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwibmFtZSI6IuyCrOyaqeyekCIsImlkIjozLCJleHAiOjE2MjkyMTUyNjIsImlhdCI6MTYyOTE5NzI2Mn0.1w5nwrHjEb1ePZTwNmV7hfY2rTYNxVNPVgani01kYt4D61o_aK1KO0zY99qdsoFxWqAJmH4E8tI2j0pxOKF4QQ
 
 {
   "name": "관리자",
@@ -19,6 +20,7 @@ client.test("Request executed successfully", function() {
 ### 사용자 추가 > 매니저
 POST {{host}}/user
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwibmFtZSI6IuyCrOyaqeyekCIsImlkIjozLCJleHAiOjE2MjkyMTUyNjIsImlhdCI6MTYyOTE5NzI2Mn0.1w5nwrHjEb1ePZTwNmV7hfY2rTYNxVNPVgani01kYt4D61o_aK1KO0zY99qdsoFxWqAJmH4E8tI2j0pxOKF4QQ
 
 {
   "name": "매니저",
@@ -37,6 +39,7 @@ client.test("Request executed successfully", function() {
 ### 사용자 추가 > 일반 사용자
 POST {{host}}/user
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwibmFtZSI6IuyCrOyaqeyekCIsImlkIjozLCJleHAiOjE2MjkyMTUyNjIsImlhdCI6MTYyOTE5NzI2Mn0.1w5nwrHjEb1ePZTwNmV7hfY2rTYNxVNPVgani01kYt4D61o_aK1KO0zY99qdsoFxWqAJmH4E8tI2j0pxOKF4QQ
 
 {
   "name": "일반 사용자",
@@ -54,6 +57,7 @@ client.test("Request executed successfully", function() {
 
 ### 사용자 목록 조회
 GET {{host}}/user/userType/ALL
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwibmFtZSI6IuyCrOyaqeyekCIsImlkIjozLCJleHAiOjE2MjkyMTUyNjIsImlhdCI6MTYyOTE5NzI2Mn0.1w5nwrHjEb1ePZTwNmV7hfY2rTYNxVNPVgani01kYt4D61o_aK1KO0zY99qdsoFxWqAJmH4E8tI2j0pxOKF4QQ
 
 > {%
 client.test("Request executed successfully", function() {
@@ -63,6 +67,7 @@ client.test("Request executed successfully", function() {
 
 ### 사용자 상세 조회
 GET {{host}}/user/{{userId}}
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwibmFtZSI6IuyCrOyaqeyekCIsImlkIjozLCJleHAiOjE2MjkyMTUyNjIsImlhdCI6MTYyOTE5NzI2Mn0.1w5nwrHjEb1ePZTwNmV7hfY2rTYNxVNPVgani01kYt4D61o_aK1KO0zY99qdsoFxWqAJmH4E8tI2j0pxOKF4QQ
 
 > {%
 client.test("Request executed successfully", function() {
@@ -73,6 +78,7 @@ client.test("Request executed successfully", function() {
 ### 사용자 수정
 PUT {{host}}/user
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwibmFtZSI6IuyCrOyaqeyekCIsImlkIjozLCJleHAiOjE2MjkyMTUyNjIsImlhdCI6MTYyOTE5NzI2Mn0.1w5nwrHjEb1ePZTwNmV7hfY2rTYNxVNPVgani01kYt4D61o_aK1KO0zY99qdsoFxWqAJmH4E8tI2j0pxOKF4QQ
 
 {
   "id": "{{userId}}",
@@ -90,6 +96,7 @@ client.test("Request executed successfully", function() {
 ### 사용자 삭제
 DELETE {{host}}/user/{{userId}}
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwibmFtZSI6IuyCrOyaqeyekCIsImlkIjozLCJleHAiOjE2MjkyMTUyNjIsImlhdCI6MTYyOTE5NzI2Mn0.1w5nwrHjEb1ePZTwNmV7hfY2rTYNxVNPVgani01kYt4D61o_aK1KO0zY99qdsoFxWqAJmH4E8tI2j0pxOKF4QQ
 
 > {%
 client.test("Request executed successfully", function() {

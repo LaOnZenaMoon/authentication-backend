@@ -58,3 +58,16 @@ decorator:
     p6spy:
       enable-logging: false
       log-format: '#%(connectionId) | %(executionTime)ms | %(category) | %(sql)'
+
+zuul:
+  igoredServices: '*'
+  routes:
+    community-api:
+      path: /community-api/**
+      serviceId: community-api
+      stripPrefix: true
+  retryable: true
+  ribbon-isolation-strategy: thread
+  thread-pool:
+    use-separate-thread-pools: true
+    thread-pool-key-prefix: auth-api

@@ -17,19 +17,22 @@ import me.lozm.domain.user.service.UserHelperService;
 import me.lozm.global.code.ResourceType;
 import me.lozm.global.code.UseYn;
 import me.lozm.global.code.UsersType;
-import org.springframework.context.ApplicationListener;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingClass;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 @Slf4j
-@Configuration
+@Component
 @RequiredArgsConstructor
-public class SetupDataConfig implements ApplicationListener<ContextRefreshedEvent> {
+@ConfigurationProperties(prefix = "lozm.data")
+@ConditionalOnMissingClass
+public class InitialDataConfig {
 
     private final AccessIpRepository accessIpRepository;
     private final UserService userService;
@@ -39,8 +42,35 @@ public class SetupDataConfig implements ApplicationListener<ContextRefreshedEven
     private final ResourceHelperService resourceHelperService;
 
 
-    @Override
-    public void onApplicationEvent(ContextRefreshedEvent event) {
+    private final int DATA_SIZE_LIMIT = 2000;
+
+
+    private boolean enabled = false;
+    private int size = 100;
+
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public void setSize(int size) {
+        if (size > DATA_SIZE_LIMIT) {
+            log.warn(String.format("Data cannot be initialized because the size is too large. The size limit is %d", DATA_SIZE_LIMIT));
+        }
+
+        this.size = size;
+    }
+
+    @PostConstruct
+    public void init() {
+        if (!isEnabled()) {
+            return;
+        }
+
         final List<User> userList = setupUserData();
         final List<Role> roleList = setupRoleData();
         final List<Resource> resourceList = setupResourceData();
@@ -49,6 +79,7 @@ public class SetupDataConfig implements ApplicationListener<ContextRefreshedEven
         setupRoleHierarchyData(roleList);
         setupAccessIpData();
     }
+
 
     private List<User> setupUserData() {
         return Arrays.asList(
@@ -100,10 +131,9 @@ public class SetupDataConfig implements ApplicationListener<ContextRefreshedEven
 
     private List<Resource> setupResourceData() {
         return Arrays.asList(
-                getResource("/**/admin/**", 1),
-                getResource("/**/manager/**", 2),
-                getResource("/**/user/**", 3),
-                getResource("/**/guest/**", 4)
+                getResource("/user/**", 1),
+                getResource("/community-api/board/**", 2),
+                getResource("/community-api/comment/**", 3)
         );
     }
 
@@ -136,14 +166,28 @@ public class SetupDataConfig implements ApplicationListener<ContextRefreshedEven
     }
 
     private void setupRoleResourceData(List<Role> roleList, List<Resource> resourceList) {
-        for (int i = 0; i < roleList.size(); i++) {
-            try {
-                authorizationService.addRoleResource(AuthorizationDto.RoleResourceRequest.builder()
-                        .roleId(roleList.get(i).getId())
-                        .resourceId(resourceList.get(i).getId())
-                        .build());
-            } catch (RuntimeException e) {
-            }
+        try {
+            authorizationService.addRoleResource(AuthorizationDto.RoleResourceRequest.builder()
+                    .roleId(roleList.get(0).getId())
+                    .resourceId(resourceList.get(0).getId())
+                    .build());
+        } catch (RuntimeException e) {
+        }
+
+        try {
+            authorizationService.addRoleResource(AuthorizationDto.RoleResourceRequest.builder()
+                    .roleId(roleList.get(2).getId())
+                    .resourceId(resourceList.get(1).getId())
+                    .build());
+        } catch (RuntimeException e) {
+        }
+
+        try {
+            authorizationService.addRoleResource(AuthorizationDto.RoleResourceRequest.builder()
+                    .roleId(roleList.get(3).getId())
+                    .resourceId(resourceList.get(2).getId())
+                    .build());
+        } catch (RuntimeException e) {
         }
     }
 
