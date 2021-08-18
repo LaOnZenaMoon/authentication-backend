@@ -12,6 +12,7 @@ lozm:
   data:
     enabled: true
 ```
+* Authorization based on URL or HTTP Method
 
 ## oauth-api
 Handles the user authentication through OAUTH
