@@ -22,7 +22,7 @@ spring:
 
 logging:
   level:
-    root: debug
+    root: info
     me.lozm: debug
 
 jwt:

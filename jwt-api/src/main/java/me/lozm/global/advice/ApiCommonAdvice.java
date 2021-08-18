@@ -1,5 +1,6 @@
 package me.lozm.global.advice;
 
+import io.jsonwebtoken.JwtException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -12,12 +13,11 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RequiredArgsConstructor
 public class ApiCommonAdvice {
 
-    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-    @ExceptionHandler({Exception.class})
-    public String handleBaseException(Exception e) {
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler({JwtException.class})
+    public String handleJwtException(JwtException e) {
         log.error(e.getMessage());
-        e.printStackTrace();
-        return HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase();
+        return e.getMessage();
     }
 
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
@@ -26,6 +26,14 @@ public class ApiCommonAdvice {
         log.error(e.getMessage());
         e.printStackTrace();
         return e.getMessage();
+    }
+
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler({Exception.class})
+    public String handleBaseException(Exception e) {
+        log.error(e.getMessage());
+        e.printStackTrace();
+        return HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase();
     }
 
 }
