@@ -8,6 +8,8 @@ import java.util.Arrays;
 public enum SearchType {
 
     NONE("NONE", "NONE"),
+    IDENTIFIER("IDENTIFIER", "사용자 로그인 ID"),
+
     ;
 
     private String code;

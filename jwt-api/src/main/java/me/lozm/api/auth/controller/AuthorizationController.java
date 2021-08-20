@@ -5,6 +5,8 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import me.lozm.api.auth.service.AuthorizationService;
 import me.lozm.domain.auth.dto.AuthorizationDto;
+import me.lozm.global.object.dto.SearchDto;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -19,16 +21,29 @@ public class AuthorizationController {
     private final AuthorizationService authorizationService;
 
 
-//    @ApiOperation("인가(Authorization) 데이터 조회")
-//    @GetMapping
-//    public AuthorizationDto.ResponseList getAuthorizationList(PageDto pageDto, SearchDto searchDto) {
-//        return AuthorizationDto.ResponseList.createBoardList(authorizationService.getAuthorizationList(pageDto.getPageRequest(), searchDto));
-//    }
+    @ApiOperation("Role 목록 조회")
+    @GetMapping("role")
+    public AuthorizationDto.RoleList getRoleList(Pageable pageable, SearchDto searchDto) {
+        return authorizationService.getRoleList(pageable, searchDto);
+    }
 
     @ApiOperation("Role 추가")
     @PostMapping("role")
     public AuthorizationDto.RoleResponse addRole(@RequestBody @Valid AuthorizationDto.RoleRequest requestDto) {
         return AuthorizationDto.RoleResponse.from(authorizationService.addRole(requestDto));
+    }
+
+    @ApiOperation("Role 삭제")
+    @DeleteMapping("role/{roleId}/user/{removeUserId}")
+    public AuthorizationDto.RoleResponse removeRole(@PathVariable("roleId") Long roleId, @PathVariable("removeUserId") Long removeUserId) {
+        return AuthorizationDto.RoleResponse.from(authorizationService.removeRole(roleId, removeUserId));
+    }
+
+
+    @ApiOperation("UserRole 목록 조회")
+    @GetMapping("user-role")
+    public AuthorizationDto.UserRoleList getUserRoleList(Pageable pageable, SearchDto searchDto) {
+        return authorizationService.getUserRoleList(pageable, searchDto);
     }
 
     @ApiOperation("UserRole 추가")
@@ -37,10 +52,36 @@ public class AuthorizationController {
         return AuthorizationDto.UserRoleResponse.from(authorizationService.addUserRole(requestDto));
     }
 
+    @ApiOperation("UserRole 삭제")
+    @DeleteMapping("user-role/{userRoleId}/user/{removeUserId}")
+    public AuthorizationDto.UserRoleResponse removeUserRole(@PathVariable("userRoleId") Long userRoleId, @PathVariable("removeUserId") Long removeUserId) {
+        return AuthorizationDto.UserRoleResponse.from(authorizationService.removeUserRole(userRoleId, removeUserId));
+    }
+
+
+    @ApiOperation("Resource 목록 조회")
+    @GetMapping("resource")
+    public AuthorizationDto.ResourceList getResourceList(Pageable pageable, SearchDto searchDto) {
+        return authorizationService.getResourceList(pageable, searchDto);
+    }
+
     @ApiOperation("Resource 추가")
     @PostMapping("resource")
     public AuthorizationDto.ResourceResponse addResource(@RequestBody @Valid AuthorizationDto.ResourceRequest requestDto) {
         return AuthorizationDto.ResourceResponse.from(authorizationService.addResource(requestDto));
+    }
+
+    @ApiOperation("Resource 삭제")
+    @DeleteMapping("resource/{resourceId}/user/{removeUserId}")
+    public AuthorizationDto.ResourceResponse removeResource(@PathVariable("resourceId") Long resourceId, @PathVariable("removeUserId") Long removeUserId) {
+        return AuthorizationDto.ResourceResponse.from(authorizationService.removeResource(resourceId, removeUserId));
+    }
+
+
+    @ApiOperation("RoleResource 목록 조회")
+    @GetMapping("role-resource")
+    public AuthorizationDto.RoleResourceList getRoleResourceList(Pageable pageable, SearchDto searchDto) {
+        return authorizationService.getRoleResourceList(pageable, searchDto);
     }
 
     @ApiOperation("RoleResource 추가")
@@ -49,10 +90,29 @@ public class AuthorizationController {
         return AuthorizationDto.RoleResourceResponse.from(authorizationService.addRoleResource(requestDto));
     }
 
+    @ApiOperation("RoleResource 삭제")
+    @DeleteMapping("role-resource/{roleResourceId}/user/{removeUserId}")
+    public AuthorizationDto.RoleResourceResponse removeRoleResource(@PathVariable("roleResourceId") Long roleResourceId, @PathVariable("removeUserId") Long removeUserId) {
+        return AuthorizationDto.RoleResourceResponse.from(authorizationService.removeRoleResource(roleResourceId, removeUserId));
+    }
+
+
+    @ApiOperation("RoleHierarchy 목록 조회")
+    @GetMapping("role-hierarchy")
+    public AuthorizationDto.RoleHierarchyList getRoleHierarchyList(Pageable pageable, SearchDto searchDto) {
+        return authorizationService.getRoleHierarchyList(pageable, searchDto);
+    }
+
     @ApiOperation("RoleHierarchy 추가")
     @PostMapping("role-hierarchy")
     public AuthorizationDto.RoleHierarchyResponse addRoleHierarchy(@RequestBody @Valid AuthorizationDto.RoleHierarchyRequest requestDto) {
         return AuthorizationDto.RoleHierarchyResponse.from(authorizationService.addRoleHierarchy(requestDto));
+    }
+
+    @ApiOperation("RoleHierarchy 삭제")
+    @DeleteMapping("role-hierarchy/{roleHierarchyId}/user/{removeUserId}")
+    public AuthorizationDto.RoleHierarchyResponse removeRoleHierarchy(@PathVariable("roleHierarchyId") Long roleHierarchyId, @PathVariable("removeUserId") Long removeUserId) {
+        return AuthorizationDto.RoleHierarchyResponse.from(authorizationService.removeRoleHierarchy(roleHierarchyId, removeUserId));
     }
 
 }

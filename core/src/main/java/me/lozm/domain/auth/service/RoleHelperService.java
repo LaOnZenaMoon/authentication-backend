@@ -31,7 +31,7 @@ public class RoleHelperService {
 
     public Role getRole(String roleName) {
         return findRole(roleName)
-                .orElseThrow(() -> new IllegalArgumentException(format("존재하지 않는 Role 입니다. Role 이름: [%d]", roleName)));
+                .orElseThrow(() -> new IllegalArgumentException(format("존재하지 않는 Role 입니다. Role 이름: [%s]", roleName)));
     }
 
 }

@@ -3,7 +3,6 @@ package me.lozm.global.config;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.lozm.api.auth.service.AuthorizationService;
-import me.lozm.api.user.service.UserService;
 import me.lozm.domain.auth.dto.AuthorizationDto;
 import me.lozm.domain.auth.entity.AccessIp;
 import me.lozm.domain.auth.entity.Resource;
@@ -13,12 +12,14 @@ import me.lozm.domain.auth.service.ResourceHelperService;
 import me.lozm.domain.auth.service.RoleHelperService;
 import me.lozm.domain.user.dto.UserDto;
 import me.lozm.domain.user.entity.User;
+import me.lozm.domain.user.repository.UserRepository;
 import me.lozm.domain.user.service.UserHelperService;
 import me.lozm.global.code.ResourceType;
 import me.lozm.global.code.UseYn;
 import me.lozm.global.code.UsersType;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingClass;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
@@ -35,7 +36,8 @@ import java.util.Optional;
 public class InitialDataConfig {
 
     private final AccessIpRepository accessIpRepository;
-    private final UserService userService;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
     private final UserHelperService userHelperService;
     private final AuthorizationService authorizationService;
     private final RoleHelperService roleHelperService;
@@ -85,25 +87,43 @@ public class InitialDataConfig {
         return Arrays.asList(
                 getUser("admin", "관리자", UsersType.ADMIN),
                 getUser("manager", "매니저", UsersType.MANAGER),
-                getUser("user", "사용자", UsersType.MANAGER),
-                getUser("guest", "방문자", UsersType.MANAGER)
+                getUser("user", "사용자", UsersType.USER),
+                getUser("guest", "방문자", UsersType.GUEST)
         );
     }
 
     private User getUser(String identifier, String userName, UsersType usersType) {
         User admin;
         try {
-            admin = userService.addUser(UserDto.AddRequest.builder()
+            admin = addUser(UserDto.AddRequest.builder()
                     .name(userName)
                     .type(usersType)
                     .identifier(identifier)
                     .password("asdfasdf1234")
                     .build());
         } catch (RuntimeException e) {
+            e.printStackTrace();
             log.debug(e.getMessage());
             admin = userHelperService.getUser(identifier, UseYn.USE);
         }
         return admin;
+    }
+
+    private User addUser(UserDto.AddRequest requestDto) {
+        final Optional<User> user = userHelperService.findUser(requestDto.getIdentifier(), UseYn.USE);
+        if (user.isPresent()) {
+            throw new IllegalArgumentException(String.format("이미 존재하는 사용자 계정입니다. 사용자 계정: [%s]", requestDto.getIdentifier()));
+        }
+
+        return userRepository.save(User.builder()
+                .createdUser(User.from(UsersType.SYSTEM))
+                .createdDateTime(LocalDateTime.now())
+                .use(UseYn.USE)
+                .name(requestDto.getName())
+                .identifier(requestDto.getIdentifier())
+                .password(passwordEncoder.encode(requestDto.getPassword()))
+                .type(requestDto.getType())
+                .build());
     }
 
     private List<Role> setupRoleData() {
@@ -132,8 +152,9 @@ public class InitialDataConfig {
     private List<Resource> setupResourceData() {
         return Arrays.asList(
                 getResource("/user/**", 1),
-                getResource("/community-api/board/**", 2),
-                getResource("/community-api/comment/**", 3)
+                getResource("/authorization/**", 2),
+                getResource("/community-api/board/**", 3),
+                getResource("/community-api/comment/**", 4)
         );
     }
 
@@ -173,10 +194,9 @@ public class InitialDataConfig {
                     .build());
         } catch (RuntimeException e) {
         }
-
         try {
             authorizationService.addRoleResource(AuthorizationDto.RoleResourceRequest.builder()
-                    .roleId(roleList.get(2).getId())
+                    .roleId(roleList.get(0).getId())
                     .resourceId(resourceList.get(1).getId())
                     .build());
         } catch (RuntimeException e) {
@@ -184,8 +204,16 @@ public class InitialDataConfig {
 
         try {
             authorizationService.addRoleResource(AuthorizationDto.RoleResourceRequest.builder()
-                    .roleId(roleList.get(3).getId())
+                    .roleId(roleList.get(2).getId())
                     .resourceId(resourceList.get(2).getId())
+                    .build());
+        } catch (RuntimeException e) {
+        }
+
+        try {
+            authorizationService.addRoleResource(AuthorizationDto.RoleResourceRequest.builder()
+                    .roleId(roleList.get(3).getId())
+                    .resourceId(resourceList.get(3).getId())
                     .build());
         } catch (RuntimeException e) {
         }
@@ -210,14 +238,25 @@ public class InitialDataConfig {
     }
 
     private void setupAccessIpData() {
-        final String LOCAL_HOST = "127.0.0.1";
-        Optional<AccessIp> accessIp = accessIpRepository.findByIpAddressAndUse(LOCAL_HOST, UseYn.USE);
-        if (!accessIp.isPresent()) {
+        final String LOCAL_HOST1 = "127.0.0.1";
+        Optional<AccessIp> accessIp1 = accessIpRepository.findByIpAddressAndUse(LOCAL_HOST1, UseYn.USE);
+        if (!accessIp1.isPresent()) {
             accessIpRepository.save(AccessIp.builder()
-                    .createdBy(UsersType.SYSTEM.getCode())
+                    .createdUser(User.from(UsersType.SYSTEM))
                     .createdDateTime(LocalDateTime.now())
                     .use(UseYn.USE)
-                    .ipAddress(LOCAL_HOST)
+                    .ipAddress(LOCAL_HOST1)
+                    .build());
+        }
+
+        final String LOCAL_HOST2 = "0:0:0:0:0:0:0:1";
+        Optional<AccessIp> accessIp2 = accessIpRepository.findByIpAddressAndUse(LOCAL_HOST2, UseYn.USE);
+        if (!accessIp2.isPresent()) {
+            accessIpRepository.save(AccessIp.builder()
+                    .createdUser(User.from(UsersType.SYSTEM))
+                    .createdDateTime(LocalDateTime.now())
+                    .use(UseYn.USE)
+                    .ipAddress(LOCAL_HOST2)
                     .build());
         }
     }

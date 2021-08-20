@@ -9,6 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
+
+import static java.lang.String.format;
 
 @Slf4j
 @Service
@@ -37,6 +40,15 @@ public class RoleHierarchyHelperService {
 
         log.info(String.format("Role Hierarchy: [%s]", concatedRoles));
         return concatedRoles.toString();
+    }
+
+    public Optional<RoleHierarchy> findRoleHierarchy(Long roleHierarchyId) {
+        return roleHierarchyRepository.findById(roleHierarchyId);
+    }
+
+    public RoleHierarchy getRoleHierarchy(Long roleHierarchyId) {
+        return findRoleHierarchy(roleHierarchyId)
+                .orElseThrow(() -> new IllegalArgumentException(format("존재하지 않는 RoleHierarchy 입니다. RoleHierarchy ID: [%d]", roleHierarchyId)));
     }
 
 }

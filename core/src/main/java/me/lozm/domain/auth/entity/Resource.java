@@ -43,8 +43,4 @@ public class Resource extends BaseEntity {
     @OneToMany(mappedBy = "resource")
     private List<RoleResource> roleResources;
 
-//    @ManyToMany(fetch = FetchType.LAZY)
-//    @JoinTable(name = "ROLE_RESOURCES", joinColumns = {@JoinColumn(name = "RESOURCE_ID")}, inverseJoinColumns = {@JoinColumn(name = "ROLE_ID")})
-//    private Set<Role> roleSet = new HashSet<>();
-
 }
