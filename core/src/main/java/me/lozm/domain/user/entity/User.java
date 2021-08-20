@@ -14,8 +14,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.ObjectUtils;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.List;
 
+import static org.apache.commons.lang3.ObjectUtils.isEmpty;
 
 
 @Getter
@@ -49,13 +51,37 @@ public class User extends BaseEntity {
     @OneToMany(mappedBy = "user")
     private List<UserRole> userRoles;
 
+    public static User from(UsersType usersType) {
+        return User.builder()
+                .id(usersType.getCode())
+                .identifier(usersType.getDescription())
+                .name(usersType.getDescription())
+                .type(usersType)
+                .build();
+    }
 
-    public void edit(String name, String encodedPassword, UsersType type, Long modifiedBy, UseYn use) {
+
+    public void edit(User user,
+                     UseYn useYn,
+                     String name,
+                     String encodedPassword,
+                     UsersType type) {
+
+//        setModifiedBy(user.getId());
+//        this.modifiedUser = user;
+        setModifiedUser(user);
+        setModifiedDateTime(LocalDateTime.now());
+        setUse(isEmpty(useYn) ? UseYn.USE : useYn);
         this.name = StringUtils.isEmpty(name) ? this.name : name;
         this.password = StringUtils.isEmpty(encodedPassword) ? this.password : encodedPassword;
         this.type = ObjectUtils.isEmpty(type) ? this.type : type;
-        setModifiedBy(modifiedBy);
-        setUse(use);
+    }
+
+    public void remove(User user) {
+//        setModifiedBy(user.getId());
+        setModifiedUser(user);
+        setModifiedDateTime(LocalDateTime.now());
+        setUse(UseYn.NOT_USE);
     }
 
 }

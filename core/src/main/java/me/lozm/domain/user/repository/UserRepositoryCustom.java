@@ -1,20 +1,18 @@
 package me.lozm.domain.user.repository;
 
 import com.querydsl.core.types.dsl.BooleanExpression;
-import me.lozm.domain.user.entity.User;
-import me.lozm.global.code.UseYn;
+import me.lozm.domain.user.vo.UserVo;
 import me.lozm.global.code.UsersType;
+import me.lozm.global.object.dto.SearchDto;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface UserRepositoryCustom {
 
-    List<User> getUserListByUsersType(UsersType usersType, Pageable pageable);
+    List<UserVo.UserList> getUserListByUsersType(UsersType usersType, Pageable pageable, SearchDto searchDto);
 
-    long getUserTotalCountByUsersType(UsersType usersType);
+    long getUserTotalCountByUsersType(UsersType usersType, SearchDto searchDto);
 
     BooleanExpression checkUsersType(UsersType usersType);
 

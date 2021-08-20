@@ -33,4 +33,13 @@ public class UserHelperService {
                 .orElseThrow(() -> new IllegalArgumentException(String.format("존재하지 않는 사용자입니다. 사용자 ID: [%d]", userId)));
     }
 
+    public Optional<User> findUser(Long userId) {
+        return userRepository.findById(userId);
+    }
+
+    public User getUser(Long userId) {
+        return findUser(userId)
+                .orElseThrow(() -> new IllegalArgumentException(String.format("존재하지 않는 사용자입니다. 사용자 ID: [%d]", userId)));
+    }
+
 }

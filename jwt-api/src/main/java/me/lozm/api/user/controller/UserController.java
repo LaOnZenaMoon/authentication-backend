@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import me.lozm.api.user.service.UserService;
 import me.lozm.domain.user.dto.UserDto;
 import me.lozm.global.code.UsersType;
+import me.lozm.global.object.dto.SearchDto;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,37 +27,32 @@ public class UserController {
 
     @ApiOperation("사용자 목록 조회")
     @GetMapping("userType/{usersType}")
-    public UserDto.ResponseList getUserList(@PathVariable("usersType") UsersType usersType, Pageable pageable) {
-
-        return UserDto.ResponseList.createUserList(userService.getUserList(usersType, pageable));
+    public UserDto.UserList getUserList(@PathVariable("usersType") UsersType usersType, Pageable pageable, SearchDto searchDto) {
+        return userService.getUserList(usersType, pageable, searchDto);
     }
 
     @ApiOperation("사용자 상세 조회")
     @GetMapping("{userId}")
-    public UserDto.ResponseOne getUserDetail(@PathVariable("userId") Long UserId) {
-
-        return UserDto.ResponseOne.from(userService.getUserDetail(UserId));
+    public UserDto.UserInfo getUserDetail(@PathVariable("userId") Long UserId) {
+        return userService.getUserDetail(UserId);
     }
 
     @ApiOperation("사용자 추가")
     @PostMapping
-    public UserDto.ResponseOne addUser(@RequestBody @Valid UserDto.AddRequest requestDto) {
-
-        return UserDto.ResponseOne.from(userService.addUser(requestDto));
+    public UserDto.UserInfo addUser(@RequestBody @Valid UserDto.AddRequest requestDto) {
+        return userService.addUser(requestDto);
     }
 
     @ApiOperation("사용자 수정")
-    @PutMapping
-    public UserDto.ResponseOne editUser(@RequestBody @Valid UserDto.EditRequest requestDto) {
-
-        return UserDto.ResponseOne.from(userService.editUser(requestDto));
+    @PutMapping("{userId}")
+    public UserDto.UserInfo editUser(@PathVariable("userId") Long userId, @RequestBody @Valid UserDto.EditRequest requestDto) {
+        return userService.editUser(requestDto);
     }
 
     @ApiOperation("사용자 삭제")
-    @DeleteMapping("{userId}")
-    public UserDto.ResponseOne removeUser(@PathVariable("userId") Long userId) {
-
-        return UserDto.ResponseOne.from(userService.removeUser(userId));
+    @DeleteMapping("{userId}/user/{removeUserId}")
+    public UserDto.UserInfo removeUser(@PathVariable("userId") Long userId, @PathVariable("removeUserId") Long removeUserId) {
+        return userService.removeUser(userId, removeUserId);
     }
 
 }
