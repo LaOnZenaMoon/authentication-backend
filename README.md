@@ -26,7 +26,7 @@ Handles the user authentication through OAUTH
 * Spring Boot
 * Spring Security
 * JPA 
-  * Spring Data JPA, QueryDsl
+  * Spring Data JPA, QueryDSL
 * Swagger
 * Junit5
 * JWT, HttpSession(will be developed), OAUTH
