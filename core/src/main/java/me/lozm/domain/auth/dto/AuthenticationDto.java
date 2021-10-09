@@ -1,5 +1,6 @@
 package me.lozm.domain.auth.dto;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,9 +17,11 @@ public class AuthenticationDto {
     @NoArgsConstructor
     public static class Request extends BaseUserDto {
         @NotEmpty
+        @ApiModelProperty(value = "사용자 로그인 ID", example = "admin")
         private String identifier;
 
         @NotEmpty
+        @ApiModelProperty(value = "사용자 로그인 패스워드", example = "asdfasdf1234")
         private String password;
     }
 
