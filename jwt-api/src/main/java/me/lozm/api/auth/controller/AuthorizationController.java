@@ -5,8 +5,8 @@ import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import me.lozm.api.auth.service.AuthorizationService;
 import me.lozm.domain.auth.dto.AuthorizationDto;
+import me.lozm.global.object.dto.PageDto;
 import me.lozm.global.object.dto.SearchDto;
-import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -23,8 +23,8 @@ public class AuthorizationController {
 
     @ApiOperation("Role 목록 조회")
     @GetMapping("role")
-    public AuthorizationDto.RoleList getRoleList(Pageable pageable, SearchDto searchDto) {
-        return authorizationService.getRoleList(pageable, searchDto);
+    public AuthorizationDto.RoleList getRoleList(PageDto pageDto, SearchDto searchDto) {
+        return authorizationService.getRoleList(pageDto.getPageRequest(), searchDto);
     }
 
     @ApiOperation("Role 추가")
@@ -42,8 +42,8 @@ public class AuthorizationController {
 
     @ApiOperation("UserRole 목록 조회")
     @GetMapping("user-role")
-    public AuthorizationDto.UserRoleList getUserRoleList(Pageable pageable, SearchDto searchDto) {
-        return authorizationService.getUserRoleList(pageable, searchDto);
+    public AuthorizationDto.UserRoleList getUserRoleList(PageDto pageDto, SearchDto searchDto) {
+        return authorizationService.getUserRoleList(pageDto.getPageRequest(), searchDto);
     }
 
     @ApiOperation("UserRole 추가")
@@ -61,8 +61,8 @@ public class AuthorizationController {
 
     @ApiOperation("Resource 목록 조회")
     @GetMapping("resource")
-    public AuthorizationDto.ResourceList getResourceList(Pageable pageable, SearchDto searchDto) {
-        return authorizationService.getResourceList(pageable, searchDto);
+    public AuthorizationDto.ResourceList getResourceList(PageDto pageDto, SearchDto searchDto) {
+        return authorizationService.getResourceList(pageDto.getPageRequest(), searchDto);
     }
 
     @ApiOperation("Resource 추가")
@@ -80,8 +80,8 @@ public class AuthorizationController {
 
     @ApiOperation("RoleResource 목록 조회")
     @GetMapping("role-resource")
-    public AuthorizationDto.RoleResourceList getRoleResourceList(Pageable pageable, SearchDto searchDto) {
-        return authorizationService.getRoleResourceList(pageable, searchDto);
+    public AuthorizationDto.RoleResourceList getRoleResourceList(PageDto pageDto, SearchDto searchDto) {
+        return authorizationService.getRoleResourceList(pageDto.getPageRequest(), searchDto);
     }
 
     @ApiOperation("RoleResource 추가")
@@ -99,8 +99,8 @@ public class AuthorizationController {
 
     @ApiOperation("RoleHierarchy 목록 조회")
     @GetMapping("role-hierarchy")
-    public AuthorizationDto.RoleHierarchyList getRoleHierarchyList(Pageable pageable, SearchDto searchDto) {
-        return authorizationService.getRoleHierarchyList(pageable, searchDto);
+    public AuthorizationDto.RoleHierarchyList getRoleHierarchyList(PageDto pageDto, SearchDto searchDto) {
+        return authorizationService.getRoleHierarchyList(pageDto.getPageRequest(), searchDto);
     }
 
     @ApiOperation("RoleHierarchy 추가")

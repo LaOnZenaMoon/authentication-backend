@@ -116,7 +116,6 @@ public class InitialDataConfig {
         }
 
         return userRepository.save(User.builder()
-                .createdUser(User.from(UsersType.SYSTEM))
                 .createdDateTime(LocalDateTime.now())
                 .use(UseYn.USE)
                 .name(requestDto.getName())
@@ -242,7 +241,6 @@ public class InitialDataConfig {
         Optional<AccessIp> accessIp1 = accessIpRepository.findByIpAddressAndUse(LOCAL_HOST1, UseYn.USE);
         if (!accessIp1.isPresent()) {
             accessIpRepository.save(AccessIp.builder()
-                    .createdUser(User.from(UsersType.SYSTEM))
                     .createdDateTime(LocalDateTime.now())
                     .use(UseYn.USE)
                     .ipAddress(LOCAL_HOST1)
@@ -253,7 +251,6 @@ public class InitialDataConfig {
         Optional<AccessIp> accessIp2 = accessIpRepository.findByIpAddressAndUse(LOCAL_HOST2, UseYn.USE);
         if (!accessIp2.isPresent()) {
             accessIpRepository.save(AccessIp.builder()
-                    .createdUser(User.from(UsersType.SYSTEM))
                     .createdDateTime(LocalDateTime.now())
                     .use(UseYn.USE)
                     .ipAddress(LOCAL_HOST2)

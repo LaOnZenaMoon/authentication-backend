@@ -1,5 +1,6 @@
 package me.lozm.domain.auth.dto;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,20 +17,42 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 
+import static me.lozm.global.swagger.AuthorizationCode.*;
+import static me.lozm.global.swagger.CommonCode.*;
+
 public class AuthorizationDto {
 
     @Getter
     @Builder
     public static class RoleListInfo {
+        @ApiModelProperty(value = ROLE_ID_DESCRIPTION)
         private Long id;
+
+        @ApiModelProperty(value = ROLE_NAME_DESCRIPTION)
         private String roleName;
+
+        @ApiModelProperty(value = ROLE_DESCRIPTION_DESCRIPTION)
         private String roleDescription;
+
+        @ApiModelProperty(value = USE_YN_DESCRIPTION)
         private UseYn useYn;
+
+        @ApiModelProperty(value = CREATED_DATETIME_DESCRIPTION)
         private LocalDateTime createdDateTime;
+
+        @ApiModelProperty(value = CREATED_BY_DESCRIPTION)
         private Long createdUserId;
+
+        @ApiModelProperty(value = CREATED_USER_LOGIN_ID_DESCRIPTION)
         private String createdUserIdentifier;
+
+        @ApiModelProperty(value = MODIFIED_DATETIME_DESCRIPTION)
         private LocalDateTime modifiedDateTime;
+
+        @ApiModelProperty(value = MODIFIED_BY_DESCRIPTION)
         private Long modifiedUserId;
+
+        @ApiModelProperty(value = MODIFIED_USER_LOGIN_ID_DESCRIPTION)
         private String modifiedUserIdentifier;
 
         public static RoleListInfo from(Role entity) {
@@ -79,18 +102,43 @@ public class AuthorizationDto {
     @Getter
     @Builder
     public static class UserRoleListInfo {
+        @ApiModelProperty(value = USER_ROLE_ID_DESCRIPTION)
         private Long id;
+
+        @ApiModelProperty(value = USER_ID_DESCRIPTION)
         private Long userId;
+
+        @ApiModelProperty(value = USER_NAME_DESCRIPTION)
         private String userName;
+
+        @ApiModelProperty(value = ROLE_ID_DESCRIPTION)
         private Long roleId;
+
+        @ApiModelProperty(value = ROLE_NAME_DESCRIPTION)
         private String roleName;
+
+        @ApiModelProperty(value = ROLE_DESCRIPTION_DESCRIPTION)
         private String roleDescription;
+
+        @ApiModelProperty(value = USE_YN_DESCRIPTION)
         private UseYn useYn;
+
+        @ApiModelProperty(value = CREATED_DATETIME_DESCRIPTION)
         private LocalDateTime createdDateTime;
+
+        @ApiModelProperty(value = CREATED_BY_DESCRIPTION)
         private Long createdUserId;
+
+        @ApiModelProperty(value = CREATED_USER_LOGIN_ID_DESCRIPTION)
         private String createdUserIdentifier;
+
+        @ApiModelProperty(value = MODIFIED_DATETIME_DESCRIPTION)
         private LocalDateTime modifiedDateTime;
+
+        @ApiModelProperty(value = MODIFIED_BY_DESCRIPTION)
         private Long modifiedUserId;
+
+        @ApiModelProperty(value = MODIFIED_USER_LOGIN_ID_DESCRIPTION)
         private String modifiedUserIdentifier;
 
         public static UserRoleListInfo from(UserRole entity) {
@@ -143,17 +191,40 @@ public class AuthorizationDto {
     @Getter
     @Builder
     public static class ResourceListInfo {
+        @ApiModelProperty(value = RESOURCE_ID_DESCRIPTION)
         private Long id;
+
+        @ApiModelProperty(value = RESOURCE_NAME_DESCRIPTION)
         private String resourceName;
+
+        @ApiModelProperty(value = RESOURCE_TYPE_DESCRIPTION)
         private ResourceType resourceType;
+
+        @ApiModelProperty(value = RESOURCE_HTTP_METHOD_DESCRIPTION)
         private String httpMethod;
+
+        @ApiModelProperty(value = RESOURCE_ORDER_NUMBER_DESCRIPTION)
         private Integer orderNumber;
+
+        @ApiModelProperty(value = USE_YN_DESCRIPTION)
         private UseYn useYn;
+
+        @ApiModelProperty(value = CREATED_DATETIME_DESCRIPTION)
         private LocalDateTime createdDateTime;
+
+        @ApiModelProperty(value = CREATED_BY_DESCRIPTION)
         private Long createdUserId;
+
+        @ApiModelProperty(value = CREATED_USER_LOGIN_ID_DESCRIPTION)
         private String createdUserIdentifier;
+
+        @ApiModelProperty(value = MODIFIED_DATETIME_DESCRIPTION)
         private LocalDateTime modifiedDateTime;
+
+        @ApiModelProperty(value = MODIFIED_BY_DESCRIPTION)
         private Long modifiedUserId;
+
+        @ApiModelProperty(value = MODIFIED_USER_LOGIN_ID_DESCRIPTION)
         private String modifiedUserIdentifier;
 
         public static ResourceListInfo from(Resource entity) {
@@ -205,21 +276,52 @@ public class AuthorizationDto {
     @Getter
     @Builder
     public static class RoleResourceListInfo {
+        @ApiModelProperty(value = ROLE_RESOURCE_ID_DESCRIPTION)
         private Long id;
+
+        @ApiModelProperty(value = ROLE_ID_DESCRIPTION)
         private Long roleId;
+
+        @ApiModelProperty(value = ROLE_NAME_DESCRIPTION)
         private String roleName;
+
+        @ApiModelProperty(value = ROLE_DESCRIPTION_DESCRIPTION)
         private String roleDescription;
+
+        @ApiModelProperty(value = RESOURCE_ID_DESCRIPTION)
         private Long resourceId;
+
+        @ApiModelProperty(value = RESOURCE_NAME_DESCRIPTION)
         private String resourceName;
+
+        @ApiModelProperty(value = RESOURCE_TYPE_DESCRIPTION)
         private ResourceType resourceType;
+
+        @ApiModelProperty(value = RESOURCE_HTTP_METHOD_DESCRIPTION)
         private String httpMethod;
+
+        @ApiModelProperty(value = RESOURCE_ORDER_NUMBER_DESCRIPTION)
         private Integer orderNumber;
+
+        @ApiModelProperty(value = USE_YN_DESCRIPTION)
         private UseYn useYn;
+
+        @ApiModelProperty(value = CREATED_DATETIME_DESCRIPTION)
         private LocalDateTime createdDateTime;
+
+        @ApiModelProperty(value = CREATED_BY_DESCRIPTION)
         private Long createdUserId;
+
+        @ApiModelProperty(value = CREATED_USER_LOGIN_ID_DESCRIPTION)
         private String createdUserIdentifier;
+
+        @ApiModelProperty(value = MODIFIED_DATETIME_DESCRIPTION)
         private LocalDateTime modifiedDateTime;
+
+        @ApiModelProperty(value = MODIFIED_BY_DESCRIPTION)
         private Long modifiedUserId;
+
+        @ApiModelProperty(value = MODIFIED_USER_LOGIN_ID_DESCRIPTION)
         private String modifiedUserIdentifier;
 
         public static RoleResourceListInfo from(RoleResource entity) {
@@ -275,19 +377,46 @@ public class AuthorizationDto {
     @Getter
     @Builder
     public static class RoleHierarchyListInfo {
+        @ApiModelProperty(value = ROLE_HIERARCHY_ID_DESCRIPTION)
         private Long id;
+
+        @ApiModelProperty(value = ROLE_ID_DESCRIPTION)
         private Long roleId;
+
+        @ApiModelProperty(value = ROLE_NAME_DESCRIPTION)
         private String roleName;
+
+        @ApiModelProperty(value = ROLE_DESCRIPTION_DESCRIPTION)
         private String roleDescription;
+
+        @ApiModelProperty(value = ROLE_ID_DESCRIPTION)
         private Long parentRoleId;
+
+        @ApiModelProperty(value = ROLE_NAME_DESCRIPTION)
         private String parentRoleName;
+
+        @ApiModelProperty(value = ROLE_DESCRIPTION_DESCRIPTION)
         private String parentRoleDescription;
+
+        @ApiModelProperty(value = USE_YN_DESCRIPTION)
         private UseYn useYn;
+
+        @ApiModelProperty(value = CREATED_DATETIME_DESCRIPTION)
         private LocalDateTime createdDateTime;
+
+        @ApiModelProperty(value = CREATED_BY_DESCRIPTION)
         private Long createdUserId;
+
+        @ApiModelProperty(value = CREATED_USER_LOGIN_ID_DESCRIPTION)
         private String createdUserIdentifier;
+
+        @ApiModelProperty(value = MODIFIED_DATETIME_DESCRIPTION)
         private LocalDateTime modifiedDateTime;
+
+        @ApiModelProperty(value = MODIFIED_BY_DESCRIPTION)
         private Long modifiedUserId;
+
+        @ApiModelProperty(value = MODIFIED_USER_LOGIN_ID_DESCRIPTION)
         private String modifiedUserIdentifier;
 
         public static RoleHierarchyListInfo from(RoleHierarchy entity) {
@@ -345,9 +474,11 @@ public class AuthorizationDto {
     @NoArgsConstructor
     public static class RoleRequest extends BaseUserDto {
         @NotEmpty
+        @ApiModelProperty(value = ROLE_NAME_DESCRIPTION, example = ROLE_NAME_EXAMPLE)
         private String roleName;
 
         @NotEmpty
+        @ApiModelProperty(value = ROLE_DESCRIPTION_DESCRIPTION, example = ROLE_DESCRIPTION_EXAMPLE)
         private String roleDescription;
     }
 
@@ -356,6 +487,7 @@ public class AuthorizationDto {
     @NoArgsConstructor
     public static class RoleResponse extends RoleRequest {
 
+        @ApiModelProperty(value = ROLE_ID_DESCRIPTION)
         private Long roleId;
 
         public static RoleResponse from(Role role) {
@@ -372,9 +504,11 @@ public class AuthorizationDto {
     @NoArgsConstructor
     public static class UserRoleRequest extends BaseUserDto {
         @NotNull
+        @ApiModelProperty(value = USER_ID_DESCRIPTION, example = USER_ID_EXAMPLE)
         private Long userId;
 
         @NotNull
+        @ApiModelProperty(value = ROLE_ID_DESCRIPTION, example = ROLE_ID_EXAMPLE)
         private Long roleId;
     }
 
@@ -382,7 +516,7 @@ public class AuthorizationDto {
     @SuperBuilder
     @NoArgsConstructor
     public static class UserRoleResponse extends UserRoleRequest {
-
+        @ApiModelProperty(value = USER_ROLE_ID_DESCRIPTION, example = USER_ROLE_ID_EXAMPLE)
         private Long userRoleId;
 
         public static UserRoleResponse from(UserRole userRole) {
@@ -400,15 +534,19 @@ public class AuthorizationDto {
     @NoArgsConstructor
     public static class ResourceRequest extends BaseUserDto {
         @NotEmpty
+        @ApiModelProperty(value = RESOURCE_NAME_DESCRIPTION, example = RESOURCE_NAME_EXAMPLE)
         private String resourceName;
 
         @NotNull
+        @ApiModelProperty(value = RESOURCE_TYPE_DESCRIPTION, example = RESOURCE_TYPE_EXAMPLE)
         private ResourceType resourceType;
 
         @NotEmpty
+        @ApiModelProperty(value = RESOURCE_HTTP_METHOD_DESCRIPTION, example = RESOURCE_HTTP_METHOD_EXAMPLE)
         private String httpMethod;
 
         @NotNull
+        @ApiModelProperty(value = RESOURCE_ORDER_NUMBER_DESCRIPTION, example = RESOURCE_ORDER_NUMBER_EXAMPLE)
         private Integer orderNumber;
     }
 
@@ -417,6 +555,7 @@ public class AuthorizationDto {
     @NoArgsConstructor
     public static class ResourceResponse extends ResourceRequest {
 
+        @ApiModelProperty(value = RESOURCE_ID_DESCRIPTION)
         private Long resourceId;
 
         public static ResourceResponse from(Resource resource) {
@@ -435,9 +574,11 @@ public class AuthorizationDto {
     @NoArgsConstructor
     public static class RoleResourceRequest extends BaseUserDto {
         @NotNull
+        @ApiModelProperty(value = ROLE_ID_DESCRIPTION, example = ROLE_ID_EXAMPLE)
         private Long roleId;
 
         @NotNull
+        @ApiModelProperty(value = RESOURCE_ID_DESCRIPTION, example = RESOURCE_ID_EXAMPLE)
         private Long resourceId;
     }
 
@@ -446,6 +587,7 @@ public class AuthorizationDto {
     @NoArgsConstructor
     public static class RoleResourceResponse extends RoleResourceRequest {
 
+        @ApiModelProperty(value = ROLE_RESOURCE_ID_DESCRIPTION)
         private Long roleResourceId;
 
         public static RoleResourceResponse from(RoleResource roleResource) {
@@ -461,8 +603,10 @@ public class AuthorizationDto {
     @NoArgsConstructor
     public static class RoleHierarchyRequest extends BaseUserDto {
         @NotNull
+        @ApiModelProperty(value = ROLE_ID_DESCRIPTION, example = ROLE_ID_EXAMPLE)
         private Long roleId;
 
+        @ApiModelProperty(value = ROLE_ID_DESCRIPTION, example = ROLE_ID_EXAMPLE)
         private Long parentRoleId;
     }
 
@@ -470,9 +614,13 @@ public class AuthorizationDto {
     @SuperBuilder
     @NoArgsConstructor
     public static class RoleHierarchyResponse extends RoleHierarchyRequest {
-
+        @ApiModelProperty(value = ROLE_HIERARCHY_ID_DESCRIPTION)
         private Long roleHierarchyId;
+
+        @ApiModelProperty(value = ROLE_NAME_DESCRIPTION)
         private String roleName;
+
+        @ApiModelProperty(value = ROLE_NAME_DESCRIPTION)
         private String parentRoleName;
 
 
