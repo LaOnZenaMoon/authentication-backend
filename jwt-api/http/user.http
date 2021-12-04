@@ -13,8 +13,8 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwibmFtZSI6IuyCrOyaq
 > {%
 client.test("Request executed successfully", function() {
   client.assert(response.status == 200, "Response status is not 200");
-  client.global.set("userId", response.body.id);
 });
+client.global.set("userId", response.body.id);
 %}
 
 ### 사용자 추가 > 매니저
@@ -32,8 +32,8 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwibmFtZSI6IuyCrOyaq
 > {%
 client.test("Request executed successfully", function() {
   client.assert(response.status == 200, "Response status is not 200");
-  client.global.set("userId", response.body.id);
 });
+client.global.set("userId", response.body.id);
 %}
 
 ### 사용자 추가 > 일반 사용자
@@ -51,8 +51,8 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwibmFtZSI6IuyCrOyaq
 > {%
 client.test("Request executed successfully", function() {
   client.assert(response.status == 200, "Response status is not 200");
-  client.global.set("userId", response.body.id);
 });
+client.global.set("userId", response.body.id);
 %}
 
 ### 사용자 목록 조회

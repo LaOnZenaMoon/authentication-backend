@@ -58,8 +58,8 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyIiwibmFtZSI6IuyCrOyaq
 > {%
 client.test("Request executed successfully", function() {
   client.assert(response.status == 200, "Response status is not 200");
-  client.global.set("boardId", response.body.id);
 });
+client.global.set("boardId", response.body.id);
 %}
 
 
@@ -69,7 +69,7 @@ GET {{host}}/community-api/board/boardType/MARKET?pageSize=10&pageNumber=0
 > {%
 client.test("Request executed successfully", function() {
   client.assert(response.status == 200, "Response status is not 200");
-  client.global.set("boardId", response.body.commentList.content[0].id);
 });
+client.global.set("boardId", response.body.commentList.content[0].id);
 %}
 
